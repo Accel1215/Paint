@@ -37,10 +37,11 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Name = "Canvas";
-            this.Text = "Form2";
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseMove);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseUp);
+            this.Text = "Picture";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             this.ResumeLayout(false);
 
         }
