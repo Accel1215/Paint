@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Paint.Figures
 {
+    [Serializable()]
     class Rectangle : Figure
     {
         public Rectangle(Point pointOne, Point pointTwo) : base(pointOne, pointTwo) { }

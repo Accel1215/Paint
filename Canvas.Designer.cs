@@ -38,6 +38,7 @@
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Name = "Canvas";
             this.Text = "Picture";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Canvas_FormClosed);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);

@@ -10,6 +10,7 @@ using Paint.Figures;
 
 namespace Paint
 {
+    [Serializable()]
     public partial class Canvas : Form
     {
         public Canvas()
@@ -20,9 +21,9 @@ namespace Paint
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            g = CreateGraphics();
             mousePresed = true;
             array.Add(new Rectangle(e.X, e.Y, e.X, e.Y));
+            g = CreateGraphics();
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -48,13 +49,23 @@ namespace Paint
         {
             foreach (Figure i in array)
             {
+                g = CreateGraphics();
                 i.Draw(g);
+                g.Dispose();
             }
         }
 
+        private void Canvas_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainWindow m = (MainWindow)this.ParentForm;
+            m.DisableSave();
+        }
+
+        internal List<Figure> Array { get => array; set => array = value; }
 
         System.Drawing.Graphics g;
         List<Figure> array;
         bool mousePresed = false;
+        public string FilePathSave = "";
     }
 }

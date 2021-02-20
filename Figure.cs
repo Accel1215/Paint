@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Paint
 {
+    [Serializable()]
     abstract class Figure
     {
         protected Point pointOne = new Point(0, 0);
@@ -76,6 +77,8 @@ namespace Paint
             DrawHash(g);
         }
     }
+
+    [Serializable()]
     class Point
     {
         public int x;
