@@ -21,27 +21,36 @@ namespace Paint
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            mousePresed = true;
-            array.Add(new Rectangle(e.X, e.Y, e.X, e.Y));
-            g = CreateGraphics();
+                isMousePresed = true;
+                array.Add(new Rectangle(e.X, e.Y, e.X, e.Y));
+                g = CreateGraphics();
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mousePresed)
+            if (isMousePresed)
             {
                 Point mousePoint = new Point(e.X, e.Y);
                 array.Last().MouseMove(g, mousePoint);
+                isMouseMoved = true;
             }
         }
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
-            if (mousePresed)
+            if (isMousePresed && !isMouseMoved)
+            {
+                array.RemoveAt(array.Count - 1);
+                isMousePresed = false;
+                isMouseMoved = false;
+            }
+            else if (isMousePresed && isMouseMoved)
             {
                 array.Last().Draw(g);
                 Invalidate();
-                mousePresed = false;
+                isMousePresed = false;
+                isMouseMoved = false;
+                isModificated = true;
             }
         }
 
@@ -61,11 +70,36 @@ namespace Paint
             m.DisableSave();
         }
 
+        private void Canvas_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(isModificated)
+            {
+                DialogResult dialogResult =  MessageBox.Show("Save your last changes?", this.Text, MessageBoxButtons.YesNoCancel);
+
+                if(dialogResult == DialogResult.Yes)
+                {
+                    MainWindow mainWindow = (MainWindow)this.MdiParent;
+
+                    mainWindow.SaveToolStripMenuItem_Click(sender, e);
+                }
+                else if(dialogResult == DialogResult.No)
+                {
+
+                }
+                else if(dialogResult == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
         internal List<Figure> Array { get => array; set => array = value; }
 
         System.Drawing.Graphics g;
         List<Figure> array;
-        bool mousePresed = false;
+        bool isMousePresed = false;
+        bool isMouseMoved = false;
+        public bool isModificated = false;
         public string FilePathSave = "";
     }
 }

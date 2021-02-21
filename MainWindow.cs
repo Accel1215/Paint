@@ -35,17 +35,19 @@ namespace Paint
             f.Show();
         }
 
-        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        public void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             Canvas canvas = (Canvas)this.ActiveMdiChild;
 
-            if(canvas.Text == "")
+            if(canvas.FilePathSave == "")
             {
                 SaveAsToolStripMenuItem_Click(sender, e);
             }
             else
             {
+                canvas.isModificated = false;
+
                 BinaryFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream(canvas.FilePathSave, FileMode.Create, FileAccess.Write, FileShare.None);
                 formatter.Serialize(stream, canvas.Array);
@@ -72,6 +74,7 @@ namespace Paint
 
                 canvas.FilePathSave = saveFileDialog.FileName;
                 canvas.Text = saveFileDialog.FileName.Substring(saveFileDialog.FileName.LastIndexOf('\\') + 1);
+                canvas.isModificated = false;
 
                 BinaryFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
