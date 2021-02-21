@@ -63,6 +63,12 @@
   <ItemGroup>
     <Compile Include="Figure.cs" />
     <Compile Include="Figures\Rectangle.cs" />
+    <Compile Include="LineSize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LineSize.Designer.cs">
+      <DependentUpon>LineSize.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="LineSize.resx">
+      <DependentUpon>LineSize.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

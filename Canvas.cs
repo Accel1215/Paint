@@ -21,9 +21,12 @@ namespace Paint
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
-                isMousePresed = true;
-                array.Add(new Rectangle(e.X, e.Y, e.X, e.Y));
-                g = CreateGraphics();
+            isMousePresed = true;
+
+            MainWindow m = (MainWindow)this.ParentForm;
+
+            array.Add(new Rectangle(e.X, e.Y, e.X, e.Y, m.lineSize, m.lineColor, m.solidColor));
+            g = CreateGraphics();
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)

@@ -16,6 +16,11 @@ namespace Paint
 {
     public partial class MainWindow : Form
     {
+
+        public Color solidColor = Color.White;
+        public Color lineColor = Color.Black;
+        public int lineSize = 1;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -133,6 +138,37 @@ namespace Paint
             {
                 this.saveToolStripMenuItem.Enabled = false;
                 this.saveAsToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void LineColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+     
+            if(colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                lineColor = colorDialog.Color;
+            }
+        }
+
+        private void BackgroudColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                solidColor = colorDialog.Color;
+            }
+        }
+
+        private void lineSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LineSize lineSize = new LineSize();
+
+            lineSize.SetSize(this.lineSize);
+            if(lineSize.ShowDialog() == DialogResult.OK)
+            {
+                this.lineSize = lineSize.GetSize();
             }
         }
     }

@@ -13,19 +13,31 @@ namespace Paint
         protected Point pointOne = new Point(0, 0);
         protected Point pointTwo = new Point(0, 0);
 
-        public Figure(Point pointOne, Point pointTwo)
+        protected Color solidColor;
+        protected Color lineColor;
+        protected int lineSize;
+
+        public Figure(Point pointOne, Point pointTwo, int lineSize, Color lineColor, Color fillColor)
         {
             this.pointOne = pointOne;
             this.pointTwo = pointTwo;
+
+            this.lineSize = lineSize;
+            this.lineColor = lineColor;
+            this.solidColor = fillColor;
         }
 
-        public Figure(int x1, int y1, int x2, int y2)
+        public Figure(int x1, int y1, int x2, int y2, int lineSize, Color lineColor, Color fillColor)
         {
             pointOne.x = x1;
             pointOne.y = y1;
 
             pointTwo.x = x2;
             pointTwo.y = y2;
+
+            this.lineSize = lineSize;
+            this.lineColor = lineColor;
+            this.solidColor = fillColor;
         }
 
         public abstract void Draw(Graphics g);
