@@ -17,17 +17,17 @@ namespace Paint
         protected Color lineColor;
         protected int lineSize;
 
-        public Figure(Point pointOne, Point pointTwo, int lineSize, Color lineColor, Color fillColor)
+        public Figure(Point pointOne, Point pointTwo, int lineSize, Color lineColor, Color solidColor)
         {
             this.pointOne = pointOne;
             this.pointTwo = pointTwo;
 
             this.lineSize = lineSize;
             this.lineColor = lineColor;
-            this.solidColor = fillColor;
+            this.solidColor = solidColor;
         }
 
-        public Figure(int x1, int y1, int x2, int y2, int lineSize, Color lineColor, Color fillColor)
+        public Figure(int x1, int y1, int x2, int y2, int lineSize, Color lineColor, Color solidColor)
         {
             pointOne.x = x1;
             pointOne.y = y1;
@@ -37,7 +37,7 @@ namespace Paint
 
             this.lineSize = lineSize;
             this.lineColor = lineColor;
-            this.solidColor = fillColor;
+            this.solidColor = solidColor;
         }
 
         public abstract void Draw(Graphics g);
@@ -55,6 +55,7 @@ namespace Paint
                 tmp = pointOne.y;
                 pointOne.y = pointTwo.y;
                 pointTwo.y = tmp;
+
             }
             else if ((pointOne.x >= pointTwo.x) && (pointOne.y >= pointTwo.y))
             {
@@ -76,6 +77,7 @@ namespace Paint
                 tmp = pointOne.x;
                 pointOne.x = pointTwo.x;
                 pointTwo.x = tmp;
+
             }
         }
 

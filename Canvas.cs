@@ -13,6 +13,16 @@ namespace Paint
     [Serializable()]
     public partial class Canvas : Form
     {
+
+        System.Drawing.Graphics g;
+        List<Figure> array;
+
+        bool isMousePresed = false;
+        bool isMouseMoved = false;
+        public bool isModificated = false;
+
+        public string FilePathSave = System.String.Empty;
+
         public Canvas()
         {
             InitializeComponent();
@@ -25,8 +35,7 @@ namespace Paint
 
             MainWindow m = (MainWindow)this.ParentForm;
 
-            array.Add(new Rectangle(e.X, e.Y, e.X, e.Y, m.lineSize, m.lineColor, m.solidColor));
-            g = CreateGraphics();
+            array.Add(new Rectangle(e.X, e.Y, e.X, e.Y, m.lineWidth, m.lineColor, m.solidColor));
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -44,26 +53,24 @@ namespace Paint
             if (isMousePresed && !isMouseMoved)
             {
                 array.RemoveAt(array.Count - 1);
-                isMousePresed = false;
-                isMouseMoved = false;
             }
             else if (isMousePresed && isMouseMoved)
             {
                 array.Last().Draw(g);
                 Invalidate();
-                isMousePresed = false;
-                isMouseMoved = false;
                 isModificated = true;
             }
+
+            isMousePresed = false;
+            isMouseMoved = false;
+
         }
 
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
             foreach (Figure i in array)
             {
-                g = CreateGraphics();
                 i.Draw(g);
-                g.Dispose();
             }
         }
 
@@ -71,6 +78,7 @@ namespace Paint
         {
             MainWindow m = (MainWindow)this.ParentForm;
             m.DisableSave();
+            this.Dispose();
         }
 
         private void Canvas_FormClosing(object sender, FormClosingEventArgs e)
@@ -85,10 +93,6 @@ namespace Paint
 
                     mainWindow.SaveToolStripMenuItem_Click(sender, e);
                 }
-                else if(dialogResult == DialogResult.No)
-                {
-
-                }
                 else if(dialogResult == DialogResult.Cancel)
                 {
                     e.Cancel = true;
@@ -98,11 +102,9 @@ namespace Paint
 
         internal List<Figure> Array { get => array; set => array = value; }
 
-        System.Drawing.Graphics g;
-        List<Figure> array;
-        bool isMousePresed = false;
-        bool isMouseMoved = false;
-        public bool isModificated = false;
-        public string FilePathSave = "";
+        private void Canvas_Load(object sender, EventArgs e)
+        {
+            g = CreateGraphics();
+        }
     }
 }

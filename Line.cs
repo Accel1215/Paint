@@ -10,19 +10,19 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public partial class LineSize : Form
+    public partial class Line : Form
     {
-        public LineSize()
+        public Line()
         {
             InitializeComponent();
         }
 
-        public int GetSize()
+        public int GetWidth()
         {
             return Convert.ToInt32(this.comboBox.Text);
         }
 
-        public void SetSize(int size)
+        public void SetWidth(int size)
         {
             this.comboBox.Text = Convert.ToString(size);
         }

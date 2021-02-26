@@ -40,6 +40,7 @@
             this.Text = "Picture";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Canvas_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Canvas_FormClosed);
+            this.Load += new System.EventHandler(this.Canvas_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);

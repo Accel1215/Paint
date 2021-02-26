@@ -131,7 +131,7 @@
             this.lineSizeToolStripMenuItem.Name = "lineSizeToolStripMenuItem";
             this.lineSizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.lineSizeToolStripMenuItem.Text = "Line size";
-            this.lineSizeToolStripMenuItem.Click += new System.EventHandler(this.lineSizeToolStripMenuItem_Click);
+            this.lineSizeToolStripMenuItem.Click += new System.EventHandler(this.LineSizeToolStripMenuItem_Click);
             // 
             // MainWindow
             // 

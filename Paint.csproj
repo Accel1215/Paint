@@ -63,11 +63,11 @@
   <ItemGroup>
     <Compile Include="Figure.cs" />
     <Compile Include="Figures\Rectangle.cs" />
-    <Compile Include="LineSize.cs">
+    <Compile Include="Line.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LineSize.Designer.cs">
-      <DependentUpon>LineSize.cs</DependentUpon>
+    <Compile Include="Line.Designer.cs">
+      <DependentUpon>Line.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -83,8 +83,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="LineSize.resx">
-      <DependentUpon>LineSize.cs</DependentUpon>
+    <EmbeddedResource Include="Line.resx">
+      <DependentUpon>Line.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

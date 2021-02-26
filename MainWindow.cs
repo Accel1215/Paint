@@ -19,7 +19,7 @@ namespace Paint
 
         public Color solidColor = Color.White;
         public Color lineColor = Color.Black;
-        public int lineSize = 1;
+        public int lineWidth = 1;
 
         public MainWindow()
         {
@@ -45,7 +45,7 @@ namespace Paint
 
             Canvas canvas = (Canvas)this.ActiveMdiChild;
 
-            if(canvas.FilePathSave == "")
+            if(canvas.FilePathSave == System.String.Empty)
             {
                 SaveAsToolStripMenuItem_Click(sender, e);
             }
@@ -65,7 +65,7 @@ namespace Paint
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
-                DefaultExt = "pic",
+                DefaultExt = "p",
                 Title = "Save",
                 FileName = "Picture",
                 InitialDirectory = Environment.CurrentDirectory
@@ -161,14 +161,15 @@ namespace Paint
             }
         }
 
-        private void lineSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LineSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LineSize lineSize = new LineSize();
+            Line line = new Line();
 
-            lineSize.SetSize(this.lineSize);
-            if(lineSize.ShowDialog() == DialogResult.OK)
+            line.SetWidth(this.lineWidth);
+
+            if(line.ShowDialog() == DialogResult.OK)
             {
-                this.lineSize = lineSize.GetSize();
+                this.lineWidth = line.GetWidth();
             }
         }
     }
