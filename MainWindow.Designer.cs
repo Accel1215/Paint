@@ -39,6 +39,7 @@
             this.lineColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroudColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lineSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,7 +108,8 @@
             this.parametrsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lineColorToolStripMenuItem,
             this.backgroudColorToolStripMenuItem,
-            this.lineSizeToolStripMenuItem});
+            this.lineSizeToolStripMenuItem,
+            this.pictureSizeToolStripMenuItem});
             this.parametrsToolStripMenuItem.Name = "parametrsToolStripMenuItem";
             this.parametrsToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.parametrsToolStripMenuItem.Text = "Parameters";
@@ -115,23 +117,30 @@
             // lineColorToolStripMenuItem
             // 
             this.lineColorToolStripMenuItem.Name = "lineColorToolStripMenuItem";
-            this.lineColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lineColorToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.lineColorToolStripMenuItem.Text = "Line color";
             this.lineColorToolStripMenuItem.Click += new System.EventHandler(this.LineColorToolStripMenuItem_Click);
             // 
             // backgroudColorToolStripMenuItem
             // 
             this.backgroudColorToolStripMenuItem.Name = "backgroudColorToolStripMenuItem";
-            this.backgroudColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.backgroudColorToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.backgroudColorToolStripMenuItem.Text = "Backgroud color";
             this.backgroudColorToolStripMenuItem.Click += new System.EventHandler(this.BackgroudColorToolStripMenuItem_Click);
             // 
             // lineSizeToolStripMenuItem
             // 
             this.lineSizeToolStripMenuItem.Name = "lineSizeToolStripMenuItem";
-            this.lineSizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lineSizeToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.lineSizeToolStripMenuItem.Text = "Line size";
-            this.lineSizeToolStripMenuItem.Click += new System.EventHandler(this.LineSizeToolStripMenuItem_Click);
+            this.lineSizeToolStripMenuItem.Click += new System.EventHandler(this.LineWidthToolStripMenuItem_Click);
+            // 
+            // pictureSizeToolStripMenuItem
+            // 
+            this.pictureSizeToolStripMenuItem.Name = "pictureSizeToolStripMenuItem";
+            this.pictureSizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pictureSizeToolStripMenuItem.Text = "Picture size";
+            this.pictureSizeToolStripMenuItem.Click += new System.EventHandler(this.PictureSizeToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -163,6 +172,7 @@
         private System.Windows.Forms.ToolStripMenuItem lineColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backgroudColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lineSizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pictureSizeToolStripMenuItem;
     }
 }
 

@@ -20,6 +20,7 @@ namespace Paint
         public Color solidColor = Color.White;
         public Color lineColor = Color.Black;
         public int lineWidth = 1;
+        public Size canvasSize = new Size(640,480);
 
         public MainWindow()
         {
@@ -28,7 +29,7 @@ namespace Paint
 
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new Canvas
+            Form f = new Canvas(canvasSize)
             {
                 MdiParent = this,
                 Text = "Picture " + this.MdiChildren.Length.ToString()
@@ -56,6 +57,7 @@ namespace Paint
                 BinaryFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream(canvas.FilePathSave, FileMode.Create, FileAccess.Write, FileShare.None);
                 formatter.Serialize(stream, canvas.Array);
+                formatter.Serialize(stream, canvas.size);
                 stream.Close();
             }
 
@@ -84,6 +86,7 @@ namespace Paint
                 BinaryFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
                 formatter.Serialize(stream, canvas.Array);
+                formatter.Serialize(stream, canvas.size);
                 stream.Close();
             }
         }
@@ -113,9 +116,10 @@ namespace Paint
                 BinaryFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
                 List<Figure> array = (List<Figure>)formatter.Deserialize(stream);
+                Size size = (Size)formatter.Deserialize(stream);
                 stream.Close();
 
-                Canvas canvas = new Canvas
+                Canvas canvas = new Canvas(size)
                 {
                     Array = array,
                     Text = openFileDialog.FileName.Substring(openFileDialog.FileName.LastIndexOf('\\') + 1),
@@ -161,7 +165,7 @@ namespace Paint
             }
         }
 
-        private void LineSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LineWidthToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Line line = new Line();
 
@@ -170,6 +174,16 @@ namespace Paint
             if(line.ShowDialog() == DialogResult.OK)
             {
                 this.lineWidth = line.GetWidth();
+            }
+        }
+
+        private void PictureSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CanvasSize canvasSize = new CanvasSize();
+
+            if(canvasSize.ShowDialog() == DialogResult.OK)
+            {
+                this.canvasSize = canvasSize.size;
             }
         }
     }

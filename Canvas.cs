@@ -23,42 +23,62 @@ namespace Paint
 
         public string FilePathSave = System.String.Empty;
 
-        public Canvas()
+        public System.Drawing.Size size;
+
+        public Canvas(System.Drawing.Size size)
         {
             InitializeComponent();
             array = new List<Figure>();
+            this.size = size;
+            this.AutoScrollMinSize = size;
         }
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
+            if((e.X > size.Width) || (e.Y > size.Height))
+            {
+                return;
+            }
+
             isMousePresed = true;
 
             MainWindow m = (MainWindow)this.ParentForm;
 
-            array.Add(new Rectangle(e.X, e.Y, e.X, e.Y, m.lineWidth, m.lineColor, m.solidColor));
+            array.Add(new Rectangle(e.X - this.AutoScrollPosition.X, e.Y - this.AutoScrollPosition.Y, e.X - this.AutoScrollPosition.X, e.Y - this.AutoScrollPosition.Y, m.lineWidth, m.lineColor, m.solidColor));
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (isMousePresed)
             {
-                Point mousePoint = new Point(e.X, e.Y);
-                array.Last().MouseMove(g, mousePoint);
+                Point mousePoint = new Point(e.X - this.AutoScrollPosition.X, e.Y - this.AutoScrollPosition.Y);
+                array.Last().MouseMove(g, mousePoint, this.AutoScrollPosition);
                 isMouseMoved = true;
             }
         }
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
+
             if (isMousePresed && !isMouseMoved)
             {
                 array.RemoveAt(array.Count - 1);
             }
             else if (isMousePresed && isMouseMoved)
             {
-                array.Last().Draw(g);
-                Invalidate();
-                isModificated = true;
+                if ((e.X - this.AutoScrollPosition.X > size.Width) || (e.Y - this.AutoScrollPosition.Y > size.Height)||
+                    (e.X - this.AutoScrollPosition.X < 0) || (e.Y - this.AutoScrollPosition.Y < 0))
+                {
+                    array.Last().Hide(g, this.AutoScrollPosition);
+                    Invalidate();
+                    array.RemoveAt(array.Count - 1);
+                }
+                else
+                {
+                    array.Last().Draw(g, this.AutoScrollPosition);
+                    Invalidate();
+                    isModificated = true; 
+                }
             }
 
             isMousePresed = false;
@@ -68,9 +88,15 @@ namespace Paint
 
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
+            System.Drawing.Point startPoint = new System.Drawing.Point(0, 0);
+            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(startPoint, this.size);
+            System.Drawing.SolidBrush solidBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White);
+
+            g.FillRectangle(solidBrush, rectangle);
+
             foreach (Figure i in array)
             {
-                i.Draw(g);
+                i.Draw(g, this.AutoScrollPosition);
             }
         }
 

@@ -28,30 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Cancel = new System.Windows.Forms.Button();
-            this.OK = new System.Windows.Forms.Button();
+            this.CancelButton = new System.Windows.Forms.Button();
+            this.OkButton = new System.Windows.Forms.Button();
             this.comboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // Cancel
+            // CancelButton
             // 
-            this.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Cancel.Location = new System.Drawing.Point(93, 39);
-            this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(75, 25);
-            this.Cancel.TabIndex = 0;
-            this.Cancel.Text = "Cancel";
-            this.Cancel.UseVisualStyleBackColor = true;
+            this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.CancelButton.Location = new System.Drawing.Point(93, 39);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(75, 25);
+            this.CancelButton.TabIndex = 0;
+            this.CancelButton.Text = "Cancel";
+            this.CancelButton.UseVisualStyleBackColor = true;
             // 
-            // OK
+            // OkButton
             // 
-            this.OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OK.Location = new System.Drawing.Point(12, 39);
-            this.OK.Name = "OK";
-            this.OK.Size = new System.Drawing.Size(75, 25);
-            this.OK.TabIndex = 1;
-            this.OK.Text = "OK";
-            this.OK.UseVisualStyleBackColor = true;
+            this.OkButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.OkButton.Location = new System.Drawing.Point(12, 39);
+            this.OkButton.Name = "OkButton";
+            this.OkButton.Size = new System.Drawing.Size(75, 25);
+            this.OkButton.TabIndex = 1;
+            this.OkButton.Text = "OK";
+            this.OkButton.UseVisualStyleBackColor = true;
             // 
             // comboBox
             // 
@@ -69,19 +69,19 @@
             this.comboBox.Size = new System.Drawing.Size(156, 21);
             this.comboBox.TabIndex = 2;
             // 
-            // LineSize
+            // Line
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(179, 79);
             this.ControlBox = false;
             this.Controls.Add(this.comboBox);
-            this.Controls.Add(this.OK);
-            this.Controls.Add(this.Cancel);
+            this.Controls.Add(this.OkButton);
+            this.Controls.Add(this.CancelButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "LineSize";
+            this.Name = "Line";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Line size";
             this.ResumeLayout(false);
@@ -90,8 +90,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button Cancel;
-        private System.Windows.Forms.Button OK;
+        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.ComboBox comboBox;
     }
 }

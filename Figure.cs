@@ -40,11 +40,11 @@ namespace Paint
             this.solidColor = solidColor;
         }
 
-        public abstract void Draw(Graphics g);
+        public abstract void Draw(Graphics g, System.Drawing.Point offset);
 
-        public abstract void DrawHash(Graphics g);
+        public abstract void DrawHash(Graphics g, System.Drawing.Point offset);
 
-        public abstract void Hide(Graphics g);
+        public abstract void Hide(Graphics g, System.Drawing.Point offset);
 
         public void Normalization(ref Point pointOne, ref Point pointTwo)
         {
@@ -81,14 +81,14 @@ namespace Paint
             }
         }
 
-        public void MouseMove(Graphics g, Point mousePosition)
+        public void MouseMove(Graphics g, Point mousePosition, System.Drawing.Point offset)
         {
-            Hide(g);
+            Hide(g, offset);
 
             pointTwo.x = mousePosition.x;
             pointTwo.y = mousePosition.y;
 
-            DrawHash(g);
+            DrawHash(g, offset);
         }
     }
 

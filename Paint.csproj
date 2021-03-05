@@ -61,6 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CanvasSize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CanvasSize.Designer.cs">
+      <DependentUpon>CanvasSize.cs</DependentUpon>
+    </Compile>
     <Compile Include="Figure.cs" />
     <Compile Include="Figures\Rectangle.cs" />
     <Compile Include="Line.cs">
@@ -83,6 +89,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CanvasSize.resx">
+      <DependentUpon>CanvasSize.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Line.resx">
       <DependentUpon>Line.cs</DependentUpon>
     </EmbeddedResource>
