@@ -61,45 +61,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CanvasSize.cs">
+    <Compile Include="CanvasSizeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CanvasSize.Designer.cs">
-      <DependentUpon>CanvasSize.cs</DependentUpon>
+    <Compile Include="CanvasSizeForm.Designer.cs">
+      <DependentUpon>CanvasSizeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Figure.cs" />
     <Compile Include="Figures\Rectangle.cs" />
-    <Compile Include="Line.cs">
+    <Compile Include="LineForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Line.Designer.cs">
-      <DependentUpon>Line.cs</DependentUpon>
+    <Compile Include="LineForm.Designer.cs">
+      <DependentUpon>LineForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.cs">
+    <Compile Include="MainWindowForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow.Designer.cs">
-      <DependentUpon>MainWindow.cs</DependentUpon>
+    <Compile Include="MainWindowForm.Designer.cs">
+      <DependentUpon>MainWindowForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Canvas.cs">
+    <Compile Include="CanvasForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Canvas.Designer.cs">
-      <DependentUpon>Canvas.cs</DependentUpon>
+    <Compile Include="CanvasForm.Designer.cs">
+      <DependentUpon>CanvasForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CanvasSize.resx">
-      <DependentUpon>CanvasSize.cs</DependentUpon>
+    <EmbeddedResource Include="CanvasSizeForm.resx">
+      <DependentUpon>CanvasSizeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Line.resx">
-      <DependentUpon>Line.cs</DependentUpon>
+    <EmbeddedResource Include="LineForm.resx">
+      <DependentUpon>LineForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow.resx">
-      <DependentUpon>MainWindow.cs</DependentUpon>
+    <EmbeddedResource Include="MainWindowForm.resx">
+      <DependentUpon>MainWindowForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Canvas.resx">
-      <DependentUpon>Canvas.cs</DependentUpon>
+    <EmbeddedResource Include="CanvasForm.resx">
+      <DependentUpon>CanvasForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

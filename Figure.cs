@@ -29,80 +29,66 @@ namespace Paint
 
         public Figure(int x1, int y1, int x2, int y2, int lineSize, Color lineColor, Color solidColor)
         {
-            pointOne.x = x1;
-            pointOne.y = y1;
+            pointOne.X = x1;
+            pointOne.Y = y1;
 
-            pointTwo.x = x2;
-            pointTwo.y = y2;
+            pointTwo.X = x2;
+            pointTwo.Y = y2;
 
             this.lineSize = lineSize;
             this.lineColor = lineColor;
             this.solidColor = solidColor;
         }
 
-        public abstract void Draw(Graphics g, System.Drawing.Point offset);
+        public abstract void Draw(Graphics g, Point offset);
 
-        public abstract void DrawHash(Graphics g, System.Drawing.Point offset);
+        public abstract void DrawHash(Graphics g, Point offset);
 
-        public abstract void Hide(Graphics g, System.Drawing.Point offset);
+        public abstract void Hide(Graphics g, Point offset);
 
         public void Normalization(ref Point pointOne, ref Point pointTwo)
         {
-            if ((pointOne.x <= pointTwo.x) && (pointOne.y >= pointTwo.y))
+            if ((pointOne.X <= pointTwo.X) && (pointOne.Y >= pointTwo.Y))
             {
                 int tmp;
 
-                tmp = pointOne.y;
-                pointOne.y = pointTwo.y;
-                pointTwo.y = tmp;
+                tmp = pointOne.Y;
+                pointOne.Y = pointTwo.Y;
+                pointTwo.Y = tmp;
 
             }
-            else if ((pointOne.x >= pointTwo.x) && (pointOne.y >= pointTwo.y))
+            else if ((pointOne.X >= pointTwo.X) && (pointOne.Y >= pointTwo.Y))
             {
                 int tmp;
 
-                tmp = pointOne.y;
-                pointOne.y = pointTwo.y;
-                pointTwo.y = tmp;
+                tmp = pointOne.Y;
+                pointOne.Y = pointTwo.Y;
+                pointTwo.Y = tmp;
 
-                tmp = pointOne.x;
-                pointOne.x = pointTwo.x;
-                pointTwo.x = tmp;
+                tmp = pointOne.X;
+                pointOne.X = pointTwo.X;
+                pointTwo.X = tmp;
 
             }
-            else if ((pointOne.x >= pointTwo.x) && (pointOne.y <= pointTwo.y))
+            else if ((pointOne.X >= pointTwo.X) && (pointOne.Y <= pointTwo.Y))
             {
                 int tmp;
 
-                tmp = pointOne.x;
-                pointOne.x = pointTwo.x;
-                pointTwo.x = tmp;
+                tmp = pointOne.X;
+                pointOne.X = pointTwo.X;
+                pointTwo.X = tmp;
 
             }
         }
 
-        public void MouseMove(Graphics g, Point mousePosition, System.Drawing.Point offset)
+        public void MouseMove(Graphics g, Point mousePosition, Point offset)
         {
             Hide(g, offset);
 
-            pointTwo.x = mousePosition.x;
-            pointTwo.y = mousePosition.y;
+            pointTwo.X = mousePosition.X;
+            pointTwo.Y = mousePosition.Y;
 
             DrawHash(g, offset);
         }
     }
-
-    [Serializable()]
-    class Point
-    {
-        public int x;
-        public int y;
-
-        public Point(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-    }
-
 }

@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public partial class CanvasSize : Form
+    public partial class CanvasSizeForm : Form
     {
         public Size size;
 
-        public CanvasSize()
+        public CanvasSizeForm()
         {
             InitializeComponent();
         }

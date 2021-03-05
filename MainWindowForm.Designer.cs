@@ -1,6 +1,6 @@
 ﻿namespace Paint
 {
-    partial class MainWindow
+    partial class MainWindowForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.

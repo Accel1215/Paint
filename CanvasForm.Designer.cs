@@ -1,6 +1,6 @@
 ﻿namespace Paint
 {
-    partial class Canvas
+    partial class CanvasForm
     {
         /// <summary>
         /// Required designer variable.

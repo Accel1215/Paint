@@ -14,7 +14,7 @@ using System.IO;
 
 namespace Paint
 {
-    public partial class MainWindow : Form
+    public partial class MainWindowForm : Form
     {
 
         public Color solidColor = Color.White;
@@ -22,14 +22,14 @@ namespace Paint
         public int lineWidth = 1;
         public Size canvasSize = new Size(640,480);
 
-        public MainWindow()
+        public MainWindowForm()
         {
             InitializeComponent();
         }
 
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form f = new Canvas(canvasSize)
+            Form f = new CanvasForm(canvasSize)
             {
                 MdiParent = this,
                 Text = "Picture " + this.MdiChildren.Length.ToString()
@@ -44,7 +44,7 @@ namespace Paint
         public void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            Canvas canvas = (Canvas)this.ActiveMdiChild;
+            CanvasForm canvas = (CanvasForm)this.ActiveMdiChild;
 
             if(canvas.FilePathSave == System.String.Empty)
             {
@@ -77,7 +77,7 @@ namespace Paint
             
             if(dialogResult == DialogResult.OK)
             {
-                Canvas canvas = (Canvas)this.ActiveMdiChild;
+                CanvasForm canvas = (CanvasForm)this.ActiveMdiChild;
 
                 canvas.FilePathSave = saveFileDialog.FileName;
                 canvas.Text = saveFileDialog.FileName.Substring(saveFileDialog.FileName.LastIndexOf('\\') + 1);
@@ -102,7 +102,7 @@ namespace Paint
 
             for (int i = 0; i < this.MdiChildren.Length; ++i) 
             {
-                Canvas canvas = (Canvas)this.MdiChildren[i];
+                CanvasForm canvas = (CanvasForm)this.MdiChildren[i];
                 if(canvas.FilePathSave == openFileDialog.FileName)
                 {
                     MessageBox.Show("File with this name is already open");
@@ -119,7 +119,7 @@ namespace Paint
                 Size size = (Size)formatter.Deserialize(stream);
                 stream.Close();
 
-                Canvas canvas = new Canvas(size)
+                CanvasForm canvas = new CanvasForm(size)
                 {
                     Array = array,
                     Text = openFileDialog.FileName.Substring(openFileDialog.FileName.LastIndexOf('\\') + 1),
@@ -167,7 +167,7 @@ namespace Paint
 
         private void LineWidthToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Line line = new Line();
+            LineForm line = new LineForm();
 
             line.SetWidth(this.lineWidth);
 
@@ -179,7 +179,7 @@ namespace Paint
 
         private void PictureSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CanvasSize canvasSize = new CanvasSize();
+            CanvasSizeForm canvasSize = new CanvasSizeForm();
 
             if(canvasSize.ShowDialog() == DialogResult.OK)
             {

@@ -7,14 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Paint.Figures;
+using System.Drawing;
 
 namespace Paint
 {
     [Serializable()]
-    public partial class Canvas : Form
+    public partial class CanvasForm : Form
     {
 
-        System.Drawing.Graphics g;
+        Graphics g;
         List<Figure> array;
 
         bool isMousePresed = false;
@@ -23,9 +24,9 @@ namespace Paint
 
         public string FilePathSave = System.String.Empty;
 
-        public System.Drawing.Size size;
+        public Size size;
 
-        public Canvas(System.Drawing.Size size)
+        public CanvasForm(Size size)
         {
             InitializeComponent();
             array = new List<Figure>();
@@ -42,9 +43,9 @@ namespace Paint
 
             isMousePresed = true;
 
-            MainWindow m = (MainWindow)this.ParentForm;
+            MainWindowForm m = (MainWindowForm)this.ParentForm;
 
-            array.Add(new Rectangle(e.X - this.AutoScrollPosition.X, e.Y - this.AutoScrollPosition.Y, e.X - this.AutoScrollPosition.X, e.Y - this.AutoScrollPosition.Y, m.lineWidth, m.lineColor, m.solidColor));
+            array.Add(new Figures.Rectangle(e.X - this.AutoScrollPosition.X, e.Y - this.AutoScrollPosition.Y, e.X - this.AutoScrollPosition.X, e.Y - this.AutoScrollPosition.Y, m.lineWidth, m.lineColor, m.solidColor));
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -102,7 +103,7 @@ namespace Paint
 
         private void Canvas_FormClosed(object sender, FormClosedEventArgs e)
         {
-            MainWindow m = (MainWindow)this.ParentForm;
+            MainWindowForm m = (MainWindowForm)this.ParentForm;
             m.DisableSave();
             this.Dispose();
         }
@@ -115,7 +116,7 @@ namespace Paint
 
                 if(dialogResult == DialogResult.Yes)
                 {
-                    MainWindow mainWindow = (MainWindow)this.MdiParent;
+                    MainWindowForm mainWindow = (MainWindowForm)this.MdiParent;
 
                     mainWindow.SaveToolStripMenuItem_Click(sender, e);
                 }

@@ -1,6 +1,6 @@
 ﻿namespace Paint
 {
-    partial class Line
+    partial class LineForm
     {
         /// <summary>
         /// Required designer variable.

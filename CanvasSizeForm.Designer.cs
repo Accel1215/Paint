@@ -1,6 +1,6 @@
 ﻿namespace Paint
 {
-    partial class CanvasSize
+    partial class CanvasSizeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -166,7 +166,7 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "X";
             // 
-            // CanvasSize
+            // CanvasSizeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -181,9 +181,9 @@
             this.Controls.Add(this.CanselButton);
             this.Controls.Add(this.OkButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "CanvasSize";
+            this.Name = "CanvasSizeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "CanvasSize";
+            this.Text = "Canvas size";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

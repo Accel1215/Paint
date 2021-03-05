@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Paint
 {
-    public partial class Line : Form
+    public partial class LineForm : Form
     {
-        public Line()
+        public LineForm()
         {
             InitializeComponent();
         }
