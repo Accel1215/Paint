@@ -10,11 +10,19 @@ namespace Paint.Figures
     [Serializable()]
     class Rectangle : Figure
     {
+        public Color solidColor;
+
         public Rectangle(Point pointOne, Point pointTwo, int lineSize, Color lineColor, Color fillColor) : 
-            base(pointOne, pointTwo, lineSize, lineColor, fillColor) { }
+            base(pointOne, pointTwo, lineSize, lineColor) 
+        {
+            solidColor = fillColor;
+        }
 
         public Rectangle(int x1, int y1, int x2, int y2, int lineSize, Color lineColor, Color fillColor) : 
-            base(x1, y1, x2, y2, lineSize, lineColor, fillColor) { }
+            base(x1, y1, x2, y2, lineSize, lineColor) 
+        {
+            solidColor = fillColor;
+        }
 
         public override void Draw(Graphics g, Point offset)
         {

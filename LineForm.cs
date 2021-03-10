@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Paint
@@ -25,6 +18,28 @@ namespace Paint
         public void SetWidth(int size)
         {
             this.comboBox.Text = Convert.ToString(size);
+        }
+
+        private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((Char.IsNumber(e.KeyChar)) || (e.KeyChar == '\b'))
+            {
+                return;
+            }
+
+            e.Handled = true;
+        }
+
+        private void comboBox_TextChanged(object sender, EventArgs e)
+        {
+            if (System.String.IsNullOrEmpty(this.comboBox.Text))
+            {
+                this.OkButton.Enabled = false;
+            }
+            else
+            {
+                this.OkButton.Enabled = true;
+            }
         }
     }
 }

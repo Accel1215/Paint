@@ -40,6 +40,11 @@
             this.backgroudColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lineSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.figureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.curveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rectangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ellipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +53,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.windowToolStripMenuItem,
-            this.parametrsToolStripMenuItem});
+            this.parametrsToolStripMenuItem,
+            this.figureToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.MdiWindowListItem = this.windowToolStripMenuItem;
             this.menuStrip1.Name = "menuStrip1";
@@ -138,11 +144,50 @@
             // pictureSizeToolStripMenuItem
             // 
             this.pictureSizeToolStripMenuItem.Name = "pictureSizeToolStripMenuItem";
-            this.pictureSizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pictureSizeToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.pictureSizeToolStripMenuItem.Text = "Picture size";
             this.pictureSizeToolStripMenuItem.Click += new System.EventHandler(this.PictureSizeToolStripMenuItem_Click);
             // 
-            // MainWindow
+            // figureToolStripMenuItem
+            // 
+            this.figureToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lineToolStripMenuItem,
+            this.curveToolStripMenuItem,
+            this.rectangleToolStripMenuItem,
+            this.ellipseToolStripMenuItem});
+            this.figureToolStripMenuItem.Name = "figureToolStripMenuItem";
+            this.figureToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.figureToolStripMenuItem.Text = "Figure";
+            // 
+            // lineToolStripMenuItem
+            // 
+            this.lineToolStripMenuItem.Name = "lineToolStripMenuItem";
+            this.lineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lineToolStripMenuItem.Text = "Line";
+            this.lineToolStripMenuItem.Click += new System.EventHandler(this.LineToolStripMenuItem_Click);
+            // 
+            // curveToolStripMenuItem
+            // 
+            this.curveToolStripMenuItem.Name = "curveToolStripMenuItem";
+            this.curveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.curveToolStripMenuItem.Text = "Curve";
+            this.curveToolStripMenuItem.Click += new System.EventHandler(this.CurveToolStripMenuItem_Click);
+            // 
+            // rectangleToolStripMenuItem
+            // 
+            this.rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
+            this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rectangleToolStripMenuItem.Text = "Rectangle";
+            this.rectangleToolStripMenuItem.Click += new System.EventHandler(this.RectangleToolStripMenuItem_Click);
+            // 
+            // ellipseToolStripMenuItem
+            // 
+            this.ellipseToolStripMenuItem.Name = "ellipseToolStripMenuItem";
+            this.ellipseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ellipseToolStripMenuItem.Text = "Ellipse";
+            this.ellipseToolStripMenuItem.Click += new System.EventHandler(this.EllipseToolStripMenuItem_Click);
+            // 
+            // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -150,7 +195,7 @@
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "MainWindow";
+            this.Name = "MainWindowForm";
             this.Text = "Paint";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -173,6 +218,11 @@
         private System.Windows.Forms.ToolStripMenuItem backgroudColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lineSizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pictureSizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem figureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem curveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rectangleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ellipseToolStripMenuItem;
     }
 }
 

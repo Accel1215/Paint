@@ -68,6 +68,9 @@
       <DependentUpon>CanvasSizeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Figure.cs" />
+    <Compile Include="Figures\Curve.cs" />
+    <Compile Include="Figures\Ellipse.cs" />
+    <Compile Include="Figures\Line.cs" />
     <Compile Include="Figures\Rectangle.cs" />
     <Compile Include="LineForm.cs">
       <SubType>Form</SubType>

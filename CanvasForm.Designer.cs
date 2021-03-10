@@ -30,14 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // Canvas
+            // CanvasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Name = "Canvas";
+            this.DoubleBuffered = true;
+            this.Name = "CanvasForm";
             this.Text = "Picture";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Canvas_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Canvas_FormClosed);

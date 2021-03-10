@@ -21,6 +21,8 @@ namespace Paint
         public Color lineColor = Color.Black;
         public int lineWidth = 1;
         public Size canvasSize = new Size(640,480);
+        public bool solidColorNeed = false;
+        public FigureType figureType = FigureType.Line;
 
         public MainWindowForm()
         {
@@ -179,12 +181,36 @@ namespace Paint
 
         private void PictureSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CanvasSizeForm canvasSize = new CanvasSizeForm();
+            CanvasSizeForm canvasSize = new CanvasSizeForm(this.canvasSize);
 
             if(canvasSize.ShowDialog() == DialogResult.OK)
             {
                 this.canvasSize = canvasSize.size;
             }
+        }
+
+        private void LineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            figureType = FigureType.Line;
+            solidColorNeed = false;
+        }
+
+        private void CurveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            figureType = FigureType.Curve;
+            solidColorNeed = false;
+        }
+
+        private void RectangleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            figureType = FigureType.Rectangle;
+            solidColorNeed = true;
+        }
+
+        private void EllipseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            figureType = FigureType.Ellipse;
+            solidColorNeed = true;
         }
     }
 }

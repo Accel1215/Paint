@@ -14,9 +14,10 @@ namespace Paint
     [Serializable()]
     public partial class CanvasForm : Form
     {
-
-        Graphics g;
         List<Figure> array;
+
+        public BufferedGraphics buffer;
+        public BufferedGraphicsContext contex;
 
         bool isMousePresed = false;
         bool isMouseMoved = false;
@@ -31,6 +32,7 @@ namespace Paint
             InitializeComponent();
             array = new List<Figure>();
             this.size = size;
+            this.Size = new Size(size.Width + 50,size.Height + 50);
             this.AutoScrollMinSize = size;
         }
 
@@ -45,7 +47,40 @@ namespace Paint
 
             MainWindowForm m = (MainWindowForm)this.ParentForm;
 
-            array.Add(new Figures.Rectangle(e.X - this.AutoScrollPosition.X, e.Y - this.AutoScrollPosition.Y, e.X - this.AutoScrollPosition.X, e.Y - this.AutoScrollPosition.Y, m.lineWidth, m.lineColor, m.solidColor));
+            switch (m.figureType)
+            {
+                case FigureType.Line:
+                    {
+                        e.Location.Offset(this.AutoScrollPosition);
+                        array.Add(new Figures.Line(e.Location, e.Location, m.lineWidth, m.lineColor));
+                        break;
+                    }
+
+                case FigureType.Curve:
+                    {
+                        e.Location.Offset(this.AutoScrollPosition);
+                        array.Add(new Figures.Curve(e.Location, e.Location, m.lineWidth, m.lineColor));
+                        break;
+                    }
+
+                case FigureType.Rectangle:
+                    {
+                        e.Location.Offset(this.AutoScrollPosition);
+                        array.Add(new Figures.Rectangle(e.Location, e.Location, m.lineWidth, m.lineColor, m.solidColor));
+                        break;
+                    }
+
+                case FigureType.Ellipse:
+                    {
+                        e.Location.Offset(this.AutoScrollPosition);
+                        array.Add(new Figures.Ellipse(e.Location, e.Location, m.lineWidth, m.lineColor, m.solidColor));
+                        break;
+                    }
+
+            }
+
+
+
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -53,7 +88,9 @@ namespace Paint
             if (isMousePresed)
             {
                 Point mousePoint = new Point(e.X - this.AutoScrollPosition.X, e.Y - this.AutoScrollPosition.Y);
-                array.Last().MouseMove(g, mousePoint, this.AutoScrollPosition);
+                array.Last().MouseMove(buffer, mousePoint, this.AutoScrollPosition);
+                Invalidate();
+                buffer.Render();
                 isMouseMoved = true;
             }
         }
@@ -70,13 +107,13 @@ namespace Paint
                 if ((e.X - this.AutoScrollPosition.X > size.Width) || (e.Y - this.AutoScrollPosition.Y > size.Height)||
                     (e.X - this.AutoScrollPosition.X < 0) || (e.Y - this.AutoScrollPosition.Y < 0))
                 {
-                    array.Last().Hide(g, this.AutoScrollPosition);
+                    array.Last().Hide(buffer.Graphics, this.AutoScrollPosition);
                     Invalidate();
                     array.RemoveAt(array.Count - 1);
                 }
                 else
                 {
-                    array.Last().Draw(g, this.AutoScrollPosition);
+                    array.Last().Draw(buffer.Graphics, this.AutoScrollPosition);
                     Invalidate();
                     isModificated = true; 
                 }
@@ -93,12 +130,14 @@ namespace Paint
             System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(startPoint, this.size);
             System.Drawing.SolidBrush solidBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White);
 
-            g.FillRectangle(solidBrush, rectangle);
+            buffer.Graphics.FillRectangle(solidBrush, rectangle);
 
             foreach (Figure i in array)
             {
-                i.Draw(g, this.AutoScrollPosition);
+                i.Draw(buffer.Graphics, this.AutoScrollPosition);
             }
+
+            buffer.Render(e.Graphics);
         }
 
         private void Canvas_FormClosed(object sender, FormClosedEventArgs e)
@@ -131,7 +170,20 @@ namespace Paint
 
         private void Canvas_Load(object sender, EventArgs e)
         {
-            g = CreateGraphics();
+
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
+
+            contex = BufferedGraphicsManager.Current;
+            contex.MaximumBuffer = new Size(this.Width - 20, this.Height - 20);
+
+            buffer = contex.Allocate(CreateGraphics(), new System.Drawing.Rectangle(0, 0, Width- 50, Height - 50));
+
+            System.Drawing.Point startPoint = new System.Drawing.Point(0, 0);
+            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(startPoint, this.size);
+            System.Drawing.SolidBrush solidBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White);
+
+            buffer.Graphics.FillRectangle(solidBrush, rectangle);
+
         }
     }
 }

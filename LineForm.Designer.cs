@@ -65,11 +65,14 @@
             "12",
             "15"});
             this.comboBox.Location = new System.Drawing.Point(12, 12);
+            this.comboBox.MaxLength = 4;
             this.comboBox.Name = "comboBox";
             this.comboBox.Size = new System.Drawing.Size(156, 21);
             this.comboBox.TabIndex = 2;
+            this.comboBox.TextChanged += new System.EventHandler(this.comboBox_TextChanged);
+            this.comboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
             // 
-            // Line
+            // LineForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -81,7 +84,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Line";
+            this.Name = "LineForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Line size";
             this.ResumeLayout(false);

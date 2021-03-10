@@ -7,27 +7,34 @@ using System.Threading.Tasks;
 
 namespace Paint
 {
+    public enum FigureType
+    {
+        Line = 0,
+        Curve = 1,
+        Rectangle = 2,
+        Ellipse = 3
+    }
+
+
     [Serializable()]
     abstract class Figure
     {
         protected Point pointOne = new Point(0, 0);
         protected Point pointTwo = new Point(0, 0);
 
-        protected Color solidColor;
         protected Color lineColor;
         protected int lineSize;
 
-        public Figure(Point pointOne, Point pointTwo, int lineSize, Color lineColor, Color solidColor)
+        public Figure(Point pointOne, Point pointTwo, int lineSize, Color lineColor)
         {
             this.pointOne = pointOne;
             this.pointTwo = pointTwo;
 
             this.lineSize = lineSize;
             this.lineColor = lineColor;
-            this.solidColor = solidColor;
         }
 
-        public Figure(int x1, int y1, int x2, int y2, int lineSize, Color lineColor, Color solidColor)
+        public Figure(int x1, int y1, int x2, int y2, int lineSize, Color lineColor)
         {
             pointOne.X = x1;
             pointOne.Y = y1;
@@ -37,7 +44,6 @@ namespace Paint
 
             this.lineSize = lineSize;
             this.lineColor = lineColor;
-            this.solidColor = solidColor;
         }
 
         public abstract void Draw(Graphics g, Point offset);
@@ -81,14 +87,14 @@ namespace Paint
             }
         }
 
-        public void MouseMove(Graphics g, Point mousePosition, Point offset)
+        public void MouseMove(BufferedGraphics g, Point mousePosition, Point offset)
         {
-            Hide(g, offset);
+            //Hide(g.Graphics, offset);
 
             pointTwo.X = mousePosition.X;
             pointTwo.Y = mousePosition.Y;
 
-            DrawHash(g, offset);
+            DrawHash(g.Graphics, offset);
         }
     }
 }

@@ -14,9 +14,28 @@ namespace Paint
     {
         public Size size;
 
-        public CanvasSizeForm()
+        public CanvasSizeForm(Size size)
         {
             InitializeComponent();
+
+            if ((size.Width == 320) && (size.Height == 240))
+            {
+                this.radioButton1.Checked = true;
+            }
+            else if ((size.Width == 640) && (size.Height == 480))
+            {
+                this.radioButton2.Checked = true;
+            }
+            else if ((size.Width == 800) && (size.Height == 600))
+            {
+                this.radioButton3.Checked = true;
+            }
+            else
+            {
+                this.textBox1.Text = Convert.ToString(size.Width);
+                this.textBox2.Text = Convert.ToString(size.Height);
+                checkBox1.Checked = true;
+            }
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -56,6 +75,15 @@ namespace Paint
                 this.label1.Enabled = true;
                 this.label2.Enabled = true;
                 this.label3.Enabled = true;
+
+                if(System.String.IsNullOrEmpty(this.textBox1.Text) || System.String.IsNullOrEmpty(this.textBox2.Text))
+                {
+                    OkButton.Enabled = false;
+                }
+                else
+                {
+                    OkButton.Enabled = true;
+                }
             }
             else
             {
@@ -67,8 +95,55 @@ namespace Paint
                 this.label3.Enabled = false;
 
                 this.groupBox1.Enabled = true;
+
+                OkButton.Enabled = true;
+
+            }
+
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((Char.IsNumber(e.KeyChar)) || (e.KeyChar == '\b'))
+            {
+                return;
+            }
+
+            e.Handled = true;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            if (System.String.IsNullOrEmpty(this.textBox2.Text))
+            {
+                this.OkButton.Enabled = false;
+            }
+            else
+            {
+                this.OkButton.Enabled = true;
             }
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (System.String.IsNullOrEmpty(this.textBox1.Text))
+            {
+                this.OkButton.Enabled = false;
+            }
+            else
+            {
+                this.OkButton.Enabled = true;
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((Char.IsNumber(e.KeyChar)) || (e.KeyChar == '\b'))
+            {
+                return;
+            }
+
+            e.Handled = true;
+        }
     }
 }
