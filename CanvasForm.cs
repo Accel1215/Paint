@@ -104,8 +104,7 @@ namespace Paint
             }
             else if (isMousePresed && isMouseMoved)
             {
-                if ((e.X - this.AutoScrollPosition.X > size.Width) || (e.Y - this.AutoScrollPosition.Y > size.Height)||
-                    (e.X - this.AutoScrollPosition.X < 0) || (e.Y - this.AutoScrollPosition.Y < 0))
+                if(!isFigureInCanvas(array.Last(),e.Location))
                 {
                     array.Last().Hide(buffer.Graphics, this.AutoScrollPosition);
                     Invalidate();
@@ -184,6 +183,31 @@ namespace Paint
 
             buffer.Graphics.FillRectangle(solidBrush, rectangle);
 
+        }
+
+        private bool isFigureInCanvas(Figure f, Point p)
+        {
+            Type t = f.GetType();
+            if(t.Equals(typeof(Curve)))
+            {
+                Curve curve = (Curve)f;
+                for(int i = 0; i < curve.points.Count; ++i)
+                {
+                    if ((curve.points[i].X - this.AutoScrollPosition.X > size.Width) || (curve.points[i].Y - this.AutoScrollPosition.Y > size.Height) ||
+                    (curve.points[i].X - this.AutoScrollPosition.X < 0) || (curve.points[i].Y - this.AutoScrollPosition.Y < 0))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if ((p.X - this.AutoScrollPosition.X > size.Width) || (p.Y - this.AutoScrollPosition.Y > size.Height) ||
+                    (p.X - this.AutoScrollPosition.X < 0) || (p.Y - this.AutoScrollPosition.Y < 0))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

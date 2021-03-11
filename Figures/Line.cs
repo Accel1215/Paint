@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Paint.Figures
 {
+    [Serializable()]
     class Line : Figure
     {
         public Line(Point pointOne, Point pointTwo, int lineSize, Color lineColor) :

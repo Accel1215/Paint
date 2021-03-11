@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Paint.Figures
 {
+    [Serializable()]
     class Ellipse : Figure
     {
         public Color solidColor;
