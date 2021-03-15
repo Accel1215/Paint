@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
 
 
 namespace Paint
@@ -23,8 +17,6 @@ namespace Paint
 
         public FigureType figureType;
         
-        public bool solidColorNeed;
-
 
         public MainWindowForm()
         {
@@ -34,8 +26,9 @@ namespace Paint
             lineColor = Color.Black;
             canvasSize = new Size(640, 480);
             figureType = FigureType.Line;
+            lineToolStripMenuItem.Checked = true;
             lineWidth = 1;
-            solidColorNeed = false;
+            backgroudColorToolStripMenuItem.Enabled = false;
         }
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -200,25 +193,41 @@ namespace Paint
         private void LineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             figureType = FigureType.Line;
-            solidColorNeed = false;
+            backgroudColorToolStripMenuItem.Enabled = false;
+            lineToolStripMenuItem.Checked = true;
+            rectangleToolStripMenuItem.Checked = false;
+            curveToolStripMenuItem.Checked = false;
+            ellipseToolStripMenuItem.Checked = false;
         }
 
         private void CurveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             figureType = FigureType.Curve;
-            solidColorNeed = false;
+            backgroudColorToolStripMenuItem.Enabled = false;
+            curveToolStripMenuItem.Checked = true;
+            ellipseToolStripMenuItem.Checked = false;
+            lineToolStripMenuItem.Checked = false;
+            rectangleToolStripMenuItem.Checked = false;
         }
 
         private void RectangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             figureType = FigureType.Rectangle;
-            solidColorNeed = true;
+            backgroudColorToolStripMenuItem.Enabled = true;
+            rectangleToolStripMenuItem.Checked = true;
+            ellipseToolStripMenuItem.Checked = false;
+            curveToolStripMenuItem.Checked = false;
+            lineToolStripMenuItem.Checked = false;
         }
 
         private void EllipseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             figureType = FigureType.Ellipse;
-            solidColorNeed = true;
+            backgroudColorToolStripMenuItem.Enabled = true;
+            ellipseToolStripMenuItem.Checked = true;
+            rectangleToolStripMenuItem.Checked = false;
+            curveToolStripMenuItem.Checked = false;
+            lineToolStripMenuItem.Checked = false;
         }
     }
 }

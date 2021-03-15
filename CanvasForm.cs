@@ -141,6 +141,8 @@ namespace Paint
         {
             MainWindowForm m = (MainWindowForm)ParentForm;
             m.DisableSave();
+            buffer.Dispose();
+            contex.Dispose();
             Dispose();
         }
 
@@ -167,6 +169,7 @@ namespace Paint
 
         private void Canvas_Load(object sender, EventArgs e)
         {
+            //Уменьшает количество бликов
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
 
             contex = BufferedGraphicsManager.Current;
