@@ -20,41 +20,41 @@ namespace Paint
 
             if ((size.Width == 320) && (size.Height == 240))
             {
-                this.radioButton1.Checked = true;
+                radioButton1.Checked = true;
             }
             else if ((size.Width == 640) && (size.Height == 480))
             {
-                this.radioButton2.Checked = true;
+                radioButton2.Checked = true;
             }
             else if ((size.Width == 800) && (size.Height == 600))
             {
-                this.radioButton3.Checked = true;
+                radioButton3.Checked = true;
             }
             else
             {
-                this.textBox1.Text = Convert.ToString(size.Width);
-                this.textBox2.Text = Convert.ToString(size.Height);
+                textBox1.Text = Convert.ToString(size.Width);
+                textBox2.Text = Convert.ToString(size.Height);
                 checkBox1.Checked = true;
             }
         }
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if(this.checkBox1.Checked == true)
+            if(checkBox1.Checked == true)
             {
                 size = new Size(Convert.ToInt32(textBox1.Text), Convert.ToInt32(textBox2.Text));
             }
             else
             {
-                if(this.radioButton1.Checked == true)
+                if(radioButton1.Checked == true)
                 {
                     size = new Size(320, 240);
                 }
-                else if (this.radioButton2.Checked == true)
+                else if (radioButton2.Checked == true)
                 {
                     size = new Size(640, 480);
                 }
-                else if(this.radioButton3.Checked == true)
+                else if(radioButton3.Checked == true)
                 {
                     size = new Size(800, 600);
                 }
@@ -65,18 +65,18 @@ namespace Paint
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if(this.checkBox1.Checked == true)
+            if(checkBox1.Checked == true)
             {
-                this.groupBox1.Enabled = false;
+                groupBox1.Enabled = false;
 
-                this.textBox1.Enabled = true;
-                this.textBox2.Enabled = true;
+                textBox1.Enabled = true;
+                textBox2.Enabled = true;
 
-                this.label1.Enabled = true;
-                this.label2.Enabled = true;
-                this.label3.Enabled = true;
+                label1.Enabled = true;
+                label2.Enabled = true;
+                label3.Enabled = true;
 
-                if(System.String.IsNullOrEmpty(this.textBox1.Text) || System.String.IsNullOrEmpty(this.textBox2.Text))
+                if(System.String.IsNullOrEmpty(textBox1.Text) || System.String.IsNullOrEmpty(textBox2.Text))
                 {
                     OkButton.Enabled = false;
                 }
@@ -87,14 +87,14 @@ namespace Paint
             }
             else
             {
-                this.textBox1.Enabled = false;
-                this.textBox2.Enabled = false;
+                textBox1.Enabled = false;
+                textBox2.Enabled = false;
 
-                this.label1.Enabled = false;
-                this.label2.Enabled = false;
-                this.label3.Enabled = false;
+                label1.Enabled = false;
+                label2.Enabled = false;
+                label3.Enabled = false;
 
-                this.groupBox1.Enabled = true;
+                groupBox1.Enabled = true;
 
                 OkButton.Enabled = true;
 
@@ -102,7 +102,7 @@ namespace Paint
 
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((Char.IsNumber(e.KeyChar)) || (e.KeyChar == '\b'))
             {
@@ -112,31 +112,31 @@ namespace Paint
             e.Handled = true;
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void TextBox2_TextChanged(object sender, EventArgs e)
         {
-            if (System.String.IsNullOrEmpty(this.textBox2.Text))
+            if (System.String.IsNullOrEmpty(textBox2.Text))
             {
-                this.OkButton.Enabled = false;
+                OkButton.Enabled = false;
             }
             else
             {
-                this.OkButton.Enabled = true;
+                OkButton.Enabled = true;
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TextBox1_TextChanged(object sender, EventArgs e)
         {
-            if (System.String.IsNullOrEmpty(this.textBox1.Text))
+            if (System.String.IsNullOrEmpty(textBox1.Text))
             {
-                this.OkButton.Enabled = false;
+                OkButton.Enabled = false;
             }
             else
             {
-                this.OkButton.Enabled = true;
+                OkButton.Enabled = true;
             }
         }
 
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((Char.IsNumber(e.KeyChar)) || (e.KeyChar == '\b'))
             {

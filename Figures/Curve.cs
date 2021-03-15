@@ -39,7 +39,6 @@ namespace Paint.Figures
 
             g.DrawCurve(pen, points.ToArray());
 
-
             pen.Dispose();
         }
 

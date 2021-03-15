@@ -16,29 +16,37 @@ namespace Paint
 {
     public partial class MainWindowForm : Form
     {
+        public Color solidColor;
+        public Color lineColor;
+        public Size canvasSize;
+        public int lineWidth;
 
-        public Color solidColor = Color.White;
-        public Color lineColor = Color.Black;
-        public int lineWidth = 1;
-        public Size canvasSize = new Size(640,480);
-        public bool solidColorNeed = false;
-        public FigureType figureType = FigureType.Line;
+        public FigureType figureType;
+        
+        public bool solidColorNeed;
+
 
         public MainWindowForm()
         {
             InitializeComponent();
-        }
 
+            solidColor = Color.White;
+            lineColor = Color.Black;
+            canvasSize = new Size(640, 480);
+            figureType = FigureType.Line;
+            lineWidth = 1;
+            solidColorNeed = false;
+        }
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form f = new CanvasForm(canvasSize)
             {
                 MdiParent = this,
-                Text = "Picture " + this.MdiChildren.Length.ToString()
+                Text = "Picture " + MdiChildren.Length.ToString()
             };
 
-            this.saveToolStripMenuItem.Enabled = true;
-            this.saveAsToolStripMenuItem.Enabled = true;
+            saveToolStripMenuItem.Enabled = true;
+            saveAsToolStripMenuItem.Enabled = true;
 
             f.Show();
         }
@@ -46,7 +54,7 @@ namespace Paint
         public void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            CanvasForm canvas = (CanvasForm)this.ActiveMdiChild;
+            CanvasForm canvas = (CanvasForm)ActiveMdiChild;
 
             if(canvas.FilePathSave == System.String.Empty)
             {
@@ -59,7 +67,7 @@ namespace Paint
                 BinaryFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream(canvas.FilePathSave, FileMode.Create, FileAccess.Write, FileShare.None);
                 formatter.Serialize(stream, canvas.Array);
-                formatter.Serialize(stream, canvas.size);
+                formatter.Serialize(stream, canvas.workPlaceSize);
                 stream.Close();
             }
 
@@ -79,7 +87,7 @@ namespace Paint
             
             if(dialogResult == DialogResult.OK)
             {
-                CanvasForm canvas = (CanvasForm)this.ActiveMdiChild;
+                CanvasForm canvas = (CanvasForm)ActiveMdiChild;
 
                 canvas.FilePathSave = saveFileDialog.FileName;
                 canvas.Text = saveFileDialog.FileName.Substring(saveFileDialog.FileName.LastIndexOf('\\') + 1);
@@ -88,7 +96,7 @@ namespace Paint
                 BinaryFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
                 formatter.Serialize(stream, canvas.Array);
-                formatter.Serialize(stream, canvas.size);
+                formatter.Serialize(stream, canvas.workPlaceSize);
                 stream.Close();
             }
         }
@@ -102,9 +110,9 @@ namespace Paint
 
             DialogResult dialogResult = openFileDialog.ShowDialog();
 
-            for (int i = 0; i < this.MdiChildren.Length; ++i) 
+            for (int i = 0; i < MdiChildren.Length; ++i) 
             {
-                CanvasForm canvas = (CanvasForm)this.MdiChildren[i];
+                CanvasForm canvas = (CanvasForm)MdiChildren[i];
                 if(canvas.FilePathSave == openFileDialog.FileName)
                 {
                     MessageBox.Show("File with this name is already open");
@@ -131,8 +139,8 @@ namespace Paint
                 Form f = canvas;
                 f.MdiParent = this;
 
-                this.saveToolStripMenuItem.Enabled = true;
-                this.saveAsToolStripMenuItem.Enabled = true;
+                saveToolStripMenuItem.Enabled = true;
+                saveAsToolStripMenuItem.Enabled = true;
 
                 f.Show();
             }
@@ -140,10 +148,10 @@ namespace Paint
 
         public void DisableSave()
         {
-            if (this.MdiChildren.Length <= 1)
+            if (MdiChildren.Length <= 1)
             {
-                this.saveToolStripMenuItem.Enabled = false;
-                this.saveAsToolStripMenuItem.Enabled = false;
+                saveToolStripMenuItem.Enabled = false;
+                saveAsToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -171,11 +179,11 @@ namespace Paint
         {
             LineForm line = new LineForm();
 
-            line.SetWidth(this.lineWidth);
+            line.SetWidth(lineWidth);
 
             if(line.ShowDialog() == DialogResult.OK)
             {
-                this.lineWidth = line.GetWidth();
+                lineWidth = line.GetWidth();
             }
         }
 

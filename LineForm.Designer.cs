@@ -69,8 +69,8 @@
             this.comboBox.Name = "comboBox";
             this.comboBox.Size = new System.Drawing.Size(156, 21);
             this.comboBox.TabIndex = 2;
-            this.comboBox.TextChanged += new System.EventHandler(this.comboBox_TextChanged);
-            this.comboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
+            this.comboBox.TextChanged += new System.EventHandler(this.ComboBox_TextChanged);
+            this.comboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox_KeyPress);
             // 
             // LineForm
             // 

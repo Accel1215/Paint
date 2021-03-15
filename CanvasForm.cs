@@ -25,54 +25,54 @@ namespace Paint
 
         public string FilePathSave = System.String.Empty;
 
-        public Size size;
+        public Size workPlaceSize;
 
         public CanvasForm(Size size)
         {
             InitializeComponent();
             array = new List<Figure>();
-            this.size = size;
-            this.Size = new Size(size.Width + 50,size.Height + 50);
-            this.AutoScrollMinSize = size;
+            workPlaceSize = size;
+            Size = size;
+            AutoScrollMinSize = size;
         }
 
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            if((e.X > size.Width) || (e.Y > size.Height))
+            if((e.X > workPlaceSize.Width) || (e.Y > workPlaceSize.Height))
             {
                 return;
             }
 
             isMousePresed = true;
 
-            MainWindowForm m = (MainWindowForm)this.ParentForm;
+            MainWindowForm m = (MainWindowForm)ParentForm;
 
             switch (m.figureType)
             {
                 case FigureType.Line:
                     {
-                        e.Location.Offset(this.AutoScrollPosition);
+                        e.Location.Offset(AutoScrollPosition);
                         array.Add(new Figures.Line(e.Location, e.Location, m.lineWidth, m.lineColor));
                         break;
                     }
 
                 case FigureType.Curve:
                     {
-                        e.Location.Offset(this.AutoScrollPosition);
+                        e.Location.Offset(AutoScrollPosition);
                         array.Add(new Figures.Curve(e.Location, e.Location, m.lineWidth, m.lineColor));
                         break;
                     }
 
                 case FigureType.Rectangle:
                     {
-                        e.Location.Offset(this.AutoScrollPosition);
+                        e.Location.Offset(AutoScrollPosition);
                         array.Add(new Figures.Rectangle(e.Location, e.Location, m.lineWidth, m.lineColor, m.solidColor));
                         break;
                     }
 
                 case FigureType.Ellipse:
                     {
-                        e.Location.Offset(this.AutoScrollPosition);
+                        e.Location.Offset(AutoScrollPosition);
                         array.Add(new Figures.Ellipse(e.Location, e.Location, m.lineWidth, m.lineColor, m.solidColor));
                         break;
                     }
@@ -87,32 +87,31 @@ namespace Paint
         {
             if (isMousePresed)
             {
-                Point mousePoint = new Point(e.X - this.AutoScrollPosition.X, e.Y - this.AutoScrollPosition.Y);
-                array.Last().MouseMove(buffer, mousePoint, this.AutoScrollPosition);
+                Point mousePoint = new Point(e.X - AutoScrollPosition.X, e.Y - AutoScrollPosition.Y);
+                array.Last().MouseMove(buffer.Graphics, mousePoint, AutoScrollPosition);
                 Invalidate();
-                buffer.Render();
+                //buffer.Render();
                 isMouseMoved = true;
             }
         }
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
-
             if (isMousePresed && !isMouseMoved)
             {
                 array.RemoveAt(array.Count - 1);
             }
             else if (isMousePresed && isMouseMoved)
             {
-                if(!isFigureInCanvas(array.Last(),e.Location))
+                if(!IsFigureInCanvas(array.Last(),e.Location))
                 {
-                    array.Last().Hide(buffer.Graphics, this.AutoScrollPosition);
+                    array.Last().Hide(buffer.Graphics, AutoScrollPosition);
                     Invalidate();
                     array.RemoveAt(array.Count - 1);
                 }
                 else
                 {
-                    array.Last().Draw(buffer.Graphics, this.AutoScrollPosition);
+                    array.Last().Draw(buffer.Graphics, AutoScrollPosition);
                     Invalidate();
                     isModificated = true; 
                 }
@@ -120,20 +119,19 @@ namespace Paint
 
             isMousePresed = false;
             isMouseMoved = false;
-
         }
 
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
             System.Drawing.Point startPoint = new System.Drawing.Point(0, 0);
-            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(startPoint, this.size);
+            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(startPoint, workPlaceSize);
             System.Drawing.SolidBrush solidBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White);
 
             buffer.Graphics.FillRectangle(solidBrush, rectangle);
 
             foreach (Figure i in array)
             {
-                i.Draw(buffer.Graphics, this.AutoScrollPosition);
+                i.Draw(buffer.Graphics, AutoScrollPosition);
             }
 
             buffer.Render(e.Graphics);
@@ -141,20 +139,20 @@ namespace Paint
 
         private void Canvas_FormClosed(object sender, FormClosedEventArgs e)
         {
-            MainWindowForm m = (MainWindowForm)this.ParentForm;
+            MainWindowForm m = (MainWindowForm)ParentForm;
             m.DisableSave();
-            this.Dispose();
+            Dispose();
         }
 
         private void Canvas_FormClosing(object sender, FormClosingEventArgs e)
         {
             if(isModificated)
             {
-                DialogResult dialogResult =  MessageBox.Show("Save your last changes?", this.Text, MessageBoxButtons.YesNoCancel);
+                DialogResult dialogResult =  MessageBox.Show("Save your last changes?", Text, MessageBoxButtons.YesNoCancel);
 
                 if(dialogResult == DialogResult.Yes)
                 {
-                    MainWindowForm mainWindow = (MainWindowForm)this.MdiParent;
+                    MainWindowForm mainWindow = (MainWindowForm)MdiParent;
 
                     mainWindow.SaveToolStripMenuItem_Click(sender, e);
                 }
@@ -169,40 +167,39 @@ namespace Paint
 
         private void Canvas_Load(object sender, EventArgs e)
         {
-
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
 
             contex = BufferedGraphicsManager.Current;
-            contex.MaximumBuffer = new Size(this.Width - 20, this.Height - 20);
+            contex.MaximumBuffer = new Size(workPlaceSize.Width, workPlaceSize.Height);
 
-            buffer = contex.Allocate(CreateGraphics(), new System.Drawing.Rectangle(0, 0, Width- 50, Height - 50));
+            buffer = contex.Allocate(CreateGraphics(), new System.Drawing.Rectangle(0, 0, workPlaceSize.Width, workPlaceSize.Height));
 
             System.Drawing.Point startPoint = new System.Drawing.Point(0, 0);
-            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(startPoint, this.size);
+            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(startPoint, workPlaceSize);
             System.Drawing.SolidBrush solidBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White);
 
             buffer.Graphics.FillRectangle(solidBrush, rectangle);
-
         }
 
-        private bool isFigureInCanvas(Figure f, Point p)
+        private bool IsFigureInCanvas(Figure f, Point p)
         {
             Type t = f.GetType();
+
             if(t.Equals(typeof(Curve)))
             {
                 Curve curve = (Curve)f;
                 for(int i = 0; i < curve.points.Count; ++i)
                 {
-                    if ((curve.points[i].X - this.AutoScrollPosition.X > size.Width) || (curve.points[i].Y - this.AutoScrollPosition.Y > size.Height) ||
-                    (curve.points[i].X - this.AutoScrollPosition.X < 0) || (curve.points[i].Y - this.AutoScrollPosition.Y < 0))
+                    if ((curve.points[i].X - AutoScrollPosition.X > workPlaceSize.Width) || (curve.points[i].Y - AutoScrollPosition.Y > workPlaceSize.Height) ||
+                    (curve.points[i].X - AutoScrollPosition.X < 0) || (curve.points[i].Y - AutoScrollPosition.Y < 0))
                     {
                         return false;
                     }
                 }
             }
 
-            if ((p.X - this.AutoScrollPosition.X > size.Width) || (p.Y - this.AutoScrollPosition.Y > size.Height) ||
-                    (p.X - this.AutoScrollPosition.X < 0) || (p.Y - this.AutoScrollPosition.Y < 0))
+            if ((p.X - AutoScrollPosition.X > workPlaceSize.Width) || (p.Y - AutoScrollPosition.Y > workPlaceSize.Height) ||
+                    (p.X - AutoScrollPosition.X < 0) || (p.Y - AutoScrollPosition.Y < 0))
             {
                 return false;
             }

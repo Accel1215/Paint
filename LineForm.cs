@@ -12,15 +12,15 @@ namespace Paint
 
         public int GetWidth()
         {
-            return Convert.ToInt32(this.comboBox.Text);
+            return Convert.ToInt32(comboBox.Text);
         }
 
         public void SetWidth(int size)
         {
-            this.comboBox.Text = Convert.ToString(size);
+            comboBox.Text = Convert.ToString(size);
         }
 
-        private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void ComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((Char.IsNumber(e.KeyChar)) || (e.KeyChar == '\b'))
             {
@@ -30,15 +30,15 @@ namespace Paint
             e.Handled = true;
         }
 
-        private void comboBox_TextChanged(object sender, EventArgs e)
+        private void ComboBox_TextChanged(object sender, EventArgs e)
         {
-            if (System.String.IsNullOrEmpty(this.comboBox.Text))
+            if (System.String.IsNullOrEmpty(comboBox.Text))
             {
-                this.OkButton.Enabled = false;
+                OkButton.Enabled = false;
             }
             else
             {
-                this.OkButton.Enabled = true;
+                OkButton.Enabled = true;
             }
         }
     }
