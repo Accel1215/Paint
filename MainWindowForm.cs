@@ -26,9 +26,11 @@ namespace Paint
             lineColor = Color.Black;
             canvasSize = new Size(640, 480);
             figureType = FigureType.Line;
-            lineToolStripMenuItem.Checked = true;
+            
+            
             lineWidth = 1;
-            backgroudColorToolStripMenuItem.Enabled = false;
+            
+
         }
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -40,6 +42,8 @@ namespace Paint
 
             saveToolStripMenuItem.Enabled = true;
             saveAsToolStripMenuItem.Enabled = true;
+
+            saveToolStripButton.Enabled = true;
 
             f.Show();
         }
@@ -145,6 +149,8 @@ namespace Paint
             {
                 saveToolStripMenuItem.Enabled = false;
                 saveAsToolStripMenuItem.Enabled = false;
+
+                saveToolStripButton.Enabled = false;
             }
         }
 
@@ -155,6 +161,7 @@ namespace Paint
             if(colorDialog.ShowDialog() == DialogResult.OK)
             {
                 lineColor = colorDialog.Color;
+                DrawStatusBar();
             }
         }
 
@@ -165,6 +172,7 @@ namespace Paint
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 solidColor = colorDialog.Color;
+                DrawStatusBar();
             }
         }
 
@@ -177,6 +185,7 @@ namespace Paint
             if(line.ShowDialog() == DialogResult.OK)
             {
                 lineWidth = line.GetWidth();
+                DrawStatusBar();
             }
         }
 
@@ -190,44 +199,107 @@ namespace Paint
             }
         }
 
-        private void LineToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FigureChoseClick(object sender, EventArgs e)
         {
-            figureType = FigureType.Line;
+            if(sender.Equals(lineToolStripMenuItem) || sender.Equals(lineToolStripButton))
+            {
+                ChangeFigure(FigureType.Line);
+            }
+            else if(sender.Equals(curveToolStripMenuItem) || sender.Equals(curveToolStripButton))
+            {
+                ChangeFigure(FigureType.Curve);
+            }
+            else if(sender.Equals(rectangleToolStripMenuItem) || sender.Equals(rectangleToolStripButton))
+            {
+                ChangeFigure(FigureType.Rectangle);
+            }
+            else if(sender.Equals(ellipseToolStripMenuItem) || sender.Equals(ellipseToolStripButton))
+            {
+                ChangeFigure(FigureType.Ellipse);
+            }
+        }
+
+        private void ChangeFigure(FigureType figure)
+        {
+            figureType = figure;
+
             backgroudColorToolStripMenuItem.Enabled = false;
-            lineToolStripMenuItem.Checked = true;
+            lineToolStripMenuItem.Checked = false;
             rectangleToolStripMenuItem.Checked = false;
             curveToolStripMenuItem.Checked = false;
             ellipseToolStripMenuItem.Checked = false;
+
+            lineToolStripButton.Checked = false;
+            rectangleToolStripButton.Checked = false;
+            curveToolStripButton.Checked = false;
+            ellipseToolStripButton.Checked = false;
+
+            switch (figure)
+            {
+                case FigureType.Line:
+                    {
+                        lineToolStripMenuItem.Checked = true;
+                        lineToolStripButton.Checked = true;
+                        break;
+                    }
+                case FigureType.Curve:
+                    {
+                        curveToolStripMenuItem.Checked = true;
+                        curveToolStripButton.Checked = true;
+                        break;
+                    }
+                case FigureType.Rectangle:
+                    {
+                        backgroudColorToolStripMenuItem.Enabled = true;
+                        rectangleToolStripMenuItem.Checked = true;
+                        rectangleToolStripButton.Checked = true;
+                        break;
+                    }
+                case FigureType.Ellipse:
+                    {
+                        backgroudColorToolStripMenuItem.Enabled = true;
+                        ellipseToolStripMenuItem.Checked = true;
+                        ellipseToolStripButton.Checked = true;
+                        break;
+                    }
+            }
         }
 
-        private void CurveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DrawStatusBar()
         {
-            figureType = FigureType.Curve;
-            backgroudColorToolStripMenuItem.Enabled = false;
-            curveToolStripMenuItem.Checked = true;
-            ellipseToolStripMenuItem.Checked = false;
-            lineToolStripMenuItem.Checked = false;
-            rectangleToolStripMenuItem.Checked = false;
+            penSizeStatusBarPanel.Text = "Pen size " + Convert.ToString(lineWidth);
+            coordinateStatusBarPanel.Text = Convert.ToString(MousePosition.X) + "x" + Convert.ToString(MousePosition.Y);
+
+            Graphics g = statusBar1.CreateGraphics();
+
+            Rectangle rectangle = new Rectangle(new Point(penColorStatusBarPanel.Width + coordinateStatusBarPanel.Width + canvasSizeStatusBarPanel.Width + 20, 5)
+                , new Size(15, 15));
+            g.FillRectangle(new SolidBrush(lineColor), rectangle);
+
+            rectangle = new Rectangle(new Point(penColorStatusBarPanel.Width + coordinateStatusBarPanel.Width + canvasSizeStatusBarPanel.Width + penColorStatusBarPanel.Width + 20, 5),
+                new Size(15, 15));
+            g.FillRectangle(new SolidBrush(solidColor), rectangle);
+
+            if (ActiveMdiChild != null)
+            {
+                CanvasForm canvasForm = (CanvasForm)ActiveMdiChild;
+                canvasSizeStatusBarPanel.Text = Convert.ToString(canvasForm.workPlaceSize.Width) + "x" + Convert.ToString(canvasForm.workPlaceSize.Height);
+            }
+            else
+            {
+                canvasSizeStatusBarPanel.Text = System.String.Empty;
+            }
         }
 
-        private void RectangleToolStripMenuItem_Click(object sender, EventArgs e)
+        private void StatusBar1_DrawItem(object sender, StatusBarDrawItemEventArgs sbdevent)
         {
-            figureType = FigureType.Rectangle;
-            backgroudColorToolStripMenuItem.Enabled = true;
-            rectangleToolStripMenuItem.Checked = true;
-            ellipseToolStripMenuItem.Checked = false;
-            curveToolStripMenuItem.Checked = false;
-            lineToolStripMenuItem.Checked = false;
+            DrawStatusBar();
         }
 
-        private void EllipseToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MainWindowForm_MdiChildActivate(object sender, EventArgs e)
         {
-            figureType = FigureType.Ellipse;
-            backgroudColorToolStripMenuItem.Enabled = true;
-            ellipseToolStripMenuItem.Checked = true;
-            rectangleToolStripMenuItem.Checked = false;
-            curveToolStripMenuItem.Checked = false;
-            lineToolStripMenuItem.Checked = false;
+            DrawStatusBar();
         }
+
     }
 }

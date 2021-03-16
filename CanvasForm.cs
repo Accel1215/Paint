@@ -142,7 +142,7 @@ namespace Paint
             MainWindowForm m = (MainWindowForm)ParentForm;
             m.DisableSave();
             buffer.Dispose();
-            contex.Dispose();
+            //contex.Dispose();
             Dispose();
         }
 
