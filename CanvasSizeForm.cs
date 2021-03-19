@@ -20,63 +20,61 @@ namespace Paint
 
             if ((size.Width == 320) && (size.Height == 240))
             {
-                radioButton1.Checked = true;
+                smallSizeRadioButton.Checked = true;
             }
             else if ((size.Width == 640) && (size.Height == 480))
             {
-                radioButton2.Checked = true;
+                mediumSizeRadioButtom.Checked = true;
             }
             else if ((size.Width == 800) && (size.Height == 600))
             {
-                radioButton3.Checked = true;
+                largeSizeRadioBottom.Checked = true;
             }
             else
             {
-                textBox1.Text = Convert.ToString(size.Width);
-                textBox2.Text = Convert.ToString(size.Height);
-                checkBox1.Checked = true;
+                widthTextBox.Text = Convert.ToString(size.Width);
+                heightTextBox.Text = Convert.ToString(size.Height);
+                customSizeCheckBox.Checked = true;
             }
         }
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if(checkBox1.Checked == true)
+            if(customSizeCheckBox.Checked == true)
             {
-                size = new Size(Convert.ToInt32(textBox1.Text), Convert.ToInt32(textBox2.Text));
+                size = new Size(Convert.ToInt32(widthTextBox.Text), Convert.ToInt32(heightTextBox.Text));
             }
             else
             {
-                if(radioButton1.Checked == true)
+                if(smallSizeRadioButton.Checked == true)
                 {
                     size = new Size(320, 240);
                 }
-                else if (radioButton2.Checked == true)
+                else if (mediumSizeRadioButtom.Checked == true)
                 {
                     size = new Size(640, 480);
                 }
-                else if(radioButton3.Checked == true)
+                else if(largeSizeRadioBottom.Checked == true)
                 {
                     size = new Size(800, 600);
                 }
             }
-            
-
         }
 
-        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        private void CustomSizeCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox1.Checked == true)
+            if(customSizeCheckBox.Checked == true)
             {
                 groupBox1.Enabled = false;
 
-                textBox1.Enabled = true;
-                textBox2.Enabled = true;
+                widthTextBox.Enabled = true;
+                heightTextBox.Enabled = true;
 
-                label1.Enabled = true;
-                label2.Enabled = true;
-                label3.Enabled = true;
+                heightLabel.Enabled = true;
+                widthLabel.Enabled = true;
+                xLabel.Enabled = true;
 
-                if(System.String.IsNullOrEmpty(textBox1.Text) || System.String.IsNullOrEmpty(textBox2.Text))
+                if(System.String.IsNullOrEmpty(widthTextBox.Text) || System.String.IsNullOrEmpty(heightTextBox.Text))
                 {
                     OkButton.Enabled = false;
                 }
@@ -87,12 +85,12 @@ namespace Paint
             }
             else
             {
-                textBox1.Enabled = false;
-                textBox2.Enabled = false;
+                widthTextBox.Enabled = false;
+                heightTextBox.Enabled = false;
 
-                label1.Enabled = false;
-                label2.Enabled = false;
-                label3.Enabled = false;
+                heightLabel.Enabled = false;
+                widthLabel.Enabled = false;
+                xLabel.Enabled = false;
 
                 groupBox1.Enabled = true;
 
@@ -102,7 +100,7 @@ namespace Paint
 
         }
 
-        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void WidthSizeTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((Char.IsNumber(e.KeyChar)) || (e.KeyChar == '\b'))
             {
@@ -112,9 +110,9 @@ namespace Paint
             e.Handled = true;
         }
 
-        private void TextBox2_TextChanged(object sender, EventArgs e)
+        private void HeightSizeTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (System.String.IsNullOrEmpty(textBox2.Text))
+            if (System.String.IsNullOrEmpty(heightTextBox.Text))
             {
                 OkButton.Enabled = false;
             }
@@ -124,9 +122,9 @@ namespace Paint
             }
         }
 
-        private void TextBox1_TextChanged(object sender, EventArgs e)
+        private void WidthSizeTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (System.String.IsNullOrEmpty(textBox1.Text))
+            if (System.String.IsNullOrEmpty(widthTextBox.Text))
             {
                 OkButton.Enabled = false;
             }
@@ -136,7 +134,7 @@ namespace Paint
             }
         }
 
-        private void TextBox2_KeyPress(object sender, KeyPressEventArgs e)
+        private void HeightSizeTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((Char.IsNumber(e.KeyChar)) || (e.KeyChar == '\b'))
             {

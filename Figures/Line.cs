@@ -32,23 +32,6 @@ namespace Paint.Figures
             pen.Dispose();
         }
 
-        public override void DrawHash(Graphics g, Point offset)
-        {
-            Pen pen = new Pen(lineColor, lineSize)
-            {
-                DashStyle = System.Drawing.Drawing2D.DashStyle.Dash
-            };
-
-            Point pointOneOffset = new Point(pointOne.X + offset.X, pointOne.Y + offset.Y);
-            Point pointTwoOffset = new Point(pointTwo.X + offset.X, pointTwo.Y + offset.Y);
-
-            //Normalization(ref normalPointOne, ref normalPointTwo);
-
-            g.DrawLine(pen, pointOneOffset, pointTwoOffset);
-
-            pen.Dispose();
-        }
-
         public override void Hide(Graphics g, Point offset)
         {
             Pen pen = new Pen(Color.White, lineSize);

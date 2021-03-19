@@ -46,13 +46,13 @@
             this.curveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rectangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ellipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusBar1 = new System.Windows.Forms.StatusBar();
+            this.statusBar = new System.Windows.Forms.StatusBar();
             this.coordinateStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
-            this.penSizeStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
             this.canvasSizeStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
+            this.penSizeStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
             this.penColorStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
             this.backgroundColorStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -69,11 +69,11 @@
             this.ellipseToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coordinateStatusBarPanel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.penSizeStatusBarPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.canvasSizeStatusBarPanel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.penSizeStatusBarPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.penColorStatusBarPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backgroundColorStatusBarPanel)).BeginInit();
-            this.toolStrip1.SuspendLayout();
+            this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -121,7 +121,7 @@
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveFileClick);
             // 
             // saveAsToolStripMenuItem
             // 
@@ -129,7 +129,7 @@
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveAsToolStripMenuItem.Text = "Save as";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveFileClick);
             // 
             // windowToolStripMenuItem
             // 
@@ -153,7 +153,7 @@
             this.lineColorToolStripMenuItem.Name = "lineColorToolStripMenuItem";
             this.lineColorToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.lineColorToolStripMenuItem.Text = "Line color";
-            this.lineColorToolStripMenuItem.Click += new System.EventHandler(this.LineColorToolStripMenuItem_Click);
+            this.lineColorToolStripMenuItem.Click += new System.EventHandler(this.LineColorChangeClick);
             // 
             // backgroudColorToolStripMenuItem
             // 
@@ -161,21 +161,21 @@
             this.backgroudColorToolStripMenuItem.Name = "backgroudColorToolStripMenuItem";
             this.backgroudColorToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.backgroudColorToolStripMenuItem.Text = "Backgroud color";
-            this.backgroudColorToolStripMenuItem.Click += new System.EventHandler(this.BackgroudColorToolStripMenuItem_Click);
+            this.backgroudColorToolStripMenuItem.Click += new System.EventHandler(this.BackgroudColorChangeClick);
             // 
             // lineSizeToolStripMenuItem
             // 
             this.lineSizeToolStripMenuItem.Name = "lineSizeToolStripMenuItem";
             this.lineSizeToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.lineSizeToolStripMenuItem.Text = "Line size";
-            this.lineSizeToolStripMenuItem.Click += new System.EventHandler(this.LineWidthToolStripMenuItem_Click);
+            this.lineSizeToolStripMenuItem.Click += new System.EventHandler(this.LineWidthChangeClick);
             // 
             // pictureSizeToolStripMenuItem
             // 
             this.pictureSizeToolStripMenuItem.Name = "pictureSizeToolStripMenuItem";
             this.pictureSizeToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.pictureSizeToolStripMenuItem.Text = "Picture size";
-            this.pictureSizeToolStripMenuItem.Click += new System.EventHandler(this.PictureSizeToolStripMenuItem_Click);
+            this.pictureSizeToolStripMenuItem.Click += new System.EventHandler(this.PictureSizeChangeClick);
             // 
             // figureToolStripMenuItem
             // 
@@ -195,60 +195,60 @@
             this.lineToolStripMenuItem.Name = "lineToolStripMenuItem";
             this.lineToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.lineToolStripMenuItem.Text = "Line";
-            this.lineToolStripMenuItem.Click += new System.EventHandler(this.FigureChoseClick);
+            this.lineToolStripMenuItem.Click += new System.EventHandler(this.FigureChooseClick);
             // 
             // curveToolStripMenuItem
             // 
             this.curveToolStripMenuItem.Name = "curveToolStripMenuItem";
             this.curveToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.curveToolStripMenuItem.Text = "Curve";
-            this.curveToolStripMenuItem.Click += new System.EventHandler(this.FigureChoseClick);
+            this.curveToolStripMenuItem.Click += new System.EventHandler(this.FigureChooseClick);
             // 
             // rectangleToolStripMenuItem
             // 
             this.rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
             this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.rectangleToolStripMenuItem.Text = "Rectangle";
-            this.rectangleToolStripMenuItem.Click += new System.EventHandler(this.FigureChoseClick);
+            this.rectangleToolStripMenuItem.Click += new System.EventHandler(this.FigureChooseClick);
             // 
             // ellipseToolStripMenuItem
             // 
             this.ellipseToolStripMenuItem.Name = "ellipseToolStripMenuItem";
             this.ellipseToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.ellipseToolStripMenuItem.Text = "Ellipse";
-            this.ellipseToolStripMenuItem.Click += new System.EventHandler(this.FigureChoseClick);
+            this.ellipseToolStripMenuItem.Click += new System.EventHandler(this.FigureChooseClick);
             // 
-            // statusBar1
+            // statusBar
             // 
-            this.statusBar1.Location = new System.Drawing.Point(0, 734);
-            this.statusBar1.Name = "statusBar1";
-            this.statusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
+            this.statusBar.Location = new System.Drawing.Point(0, 734);
+            this.statusBar.Name = "statusBar";
+            this.statusBar.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.coordinateStatusBarPanel,
             this.canvasSizeStatusBarPanel,
             this.penSizeStatusBarPanel,
             this.penColorStatusBarPanel,
             this.backgroundColorStatusBarPanel});
-            this.statusBar1.ShowPanels = true;
-            this.statusBar1.Size = new System.Drawing.Size(1288, 22);
-            this.statusBar1.TabIndex = 3;
-            this.statusBar1.Text = "statusBar1";
-            this.statusBar1.DrawItem += new System.Windows.Forms.StatusBarDrawItemEventHandler(this.StatusBar1_DrawItem);
+            this.statusBar.ShowPanels = true;
+            this.statusBar.Size = new System.Drawing.Size(1288, 22);
+            this.statusBar.TabIndex = 3;
+            this.statusBar.Text = "statusBar1";
+            this.statusBar.DrawItem += new System.Windows.Forms.StatusBarDrawItemEventHandler(this.StatusBar_DrawItem);
             // 
             // coordinateStatusBarPanel
             // 
             this.coordinateStatusBarPanel.Name = "coordinateStatusBarPanel";
             this.coordinateStatusBarPanel.ToolTipText = "Mouse coordinates";
             // 
+            // canvasSizeStatusBarPanel
+            // 
+            this.canvasSizeStatusBarPanel.Name = "canvasSizeStatusBarPanel";
+            this.canvasSizeStatusBarPanel.ToolTipText = "Canvas size";
+            // 
             // penSizeStatusBarPanel
             // 
             this.penSizeStatusBarPanel.Name = "penSizeStatusBarPanel";
             this.penSizeStatusBarPanel.ToolTipText = "Pen size";
             this.penSizeStatusBarPanel.Width = 50;
-            // 
-            // canvasSizeStatusBarPanel
-            // 
-            this.canvasSizeStatusBarPanel.Name = "canvasSizeStatusBarPanel";
-            this.canvasSizeStatusBarPanel.ToolTipText = "Canvas size";
             // 
             // penColorStatusBarPanel
             // 
@@ -264,9 +264,9 @@
             this.backgroundColorStatusBarPanel.ToolTipText = "Background color";
             this.backgroundColorStatusBarPanel.Width = 50;
             // 
-            // toolStrip1
+            // toolStrip
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripButton,
             this.newToolStripButton,
             this.openToolStripButton,
@@ -281,13 +281,13 @@
             this.curveToolStripButton,
             this.rectangleToolStripButton,
             this.ellipseToolStripButton});
-            this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStrip1.Size = new System.Drawing.Size(1288, 25);
-            this.toolStrip1.TabIndex = 5;
-            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.toolStrip.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolStrip.Size = new System.Drawing.Size(1288, 25);
+            this.toolStrip.TabIndex = 5;
+            this.toolStrip.Text = "toolStrip1";
             // 
             // saveToolStripButton
             // 
@@ -298,7 +298,7 @@
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.saveToolStripButton.Text = "Save";
-            this.saveToolStripButton.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            this.saveToolStripButton.Click += new System.EventHandler(this.SaveFileClick);
             // 
             // newToolStripButton
             // 
@@ -333,7 +333,7 @@
             this.penSizeToolStripButton.Name = "penSizeToolStripButton";
             this.penSizeToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.penSizeToolStripButton.Text = "Size";
-            this.penSizeToolStripButton.Click += new System.EventHandler(this.LineWidthToolStripMenuItem_Click);
+            this.penSizeToolStripButton.Click += new System.EventHandler(this.LineWidthChangeClick);
             // 
             // penColorToolStripButton
             // 
@@ -343,7 +343,7 @@
             this.penColorToolStripButton.Name = "penColorToolStripButton";
             this.penColorToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.penColorToolStripButton.Text = "Color";
-            this.penColorToolStripButton.Click += new System.EventHandler(this.LineColorToolStripMenuItem_Click);
+            this.penColorToolStripButton.Click += new System.EventHandler(this.LineColorChangeClick);
             // 
             // backgroundColorToolStripButton
             // 
@@ -354,7 +354,7 @@
             this.backgroundColorToolStripButton.Name = "backgroundColorToolStripButton";
             this.backgroundColorToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.backgroundColorToolStripButton.Text = "Fill";
-            this.backgroundColorToolStripButton.Click += new System.EventHandler(this.BackgroudColorToolStripMenuItem_Click);
+            this.backgroundColorToolStripButton.Click += new System.EventHandler(this.BackgroudColorChangeClick);
             // 
             // toolStripSeparator2
             // 
@@ -369,7 +369,7 @@
             this.canvasSizeToolStripButton.Name = "canvasSizeToolStripButton";
             this.canvasSizeToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.canvasSizeToolStripButton.Text = "Canvas size";
-            this.canvasSizeToolStripButton.Click += new System.EventHandler(this.PictureSizeToolStripMenuItem_Click);
+            this.canvasSizeToolStripButton.Click += new System.EventHandler(this.PictureSizeChangeClick);
             // 
             // toolStripSeparator3
             // 
@@ -386,7 +386,7 @@
             this.lineToolStripButton.Name = "lineToolStripButton";
             this.lineToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.lineToolStripButton.Text = "Line";
-            this.lineToolStripButton.Click += new System.EventHandler(this.FigureChoseClick);
+            this.lineToolStripButton.Click += new System.EventHandler(this.FigureChooseClick);
             // 
             // curveToolStripButton
             // 
@@ -396,7 +396,7 @@
             this.curveToolStripButton.Name = "curveToolStripButton";
             this.curveToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.curveToolStripButton.Text = "Curve";
-            this.curveToolStripButton.Click += new System.EventHandler(this.FigureChoseClick);
+            this.curveToolStripButton.Click += new System.EventHandler(this.FigureChooseClick);
             // 
             // rectangleToolStripButton
             // 
@@ -406,7 +406,7 @@
             this.rectangleToolStripButton.Name = "rectangleToolStripButton";
             this.rectangleToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.rectangleToolStripButton.Text = "Rectangle";
-            this.rectangleToolStripButton.Click += new System.EventHandler(this.FigureChoseClick);
+            this.rectangleToolStripButton.Click += new System.EventHandler(this.FigureChooseClick);
             // 
             // ellipseToolStripButton
             // 
@@ -416,15 +416,15 @@
             this.ellipseToolStripButton.Name = "ellipseToolStripButton";
             this.ellipseToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.ellipseToolStripButton.Text = "Ellipse";
-            this.ellipseToolStripButton.Click += new System.EventHandler(this.FigureChoseClick);
+            this.ellipseToolStripButton.Click += new System.EventHandler(this.FigureChooseClick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1288, 756);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.statusBar1);
+            this.Controls.Add(this.toolStrip);
+            this.Controls.Add(this.statusBar);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
@@ -434,12 +434,12 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coordinateStatusBarPanel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.penSizeStatusBarPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.canvasSizeStatusBarPanel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.penSizeStatusBarPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.penColorStatusBarPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.backgroundColorStatusBarPanel)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -464,13 +464,13 @@
         private System.Windows.Forms.ToolStripMenuItem curveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rectangleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ellipseToolStripMenuItem;
-        private System.Windows.Forms.StatusBar statusBar1;
+        private System.Windows.Forms.StatusBar statusBar;
         private System.Windows.Forms.StatusBarPanel penSizeStatusBarPanel;
         private System.Windows.Forms.StatusBarPanel penColorStatusBarPanel;
         private System.Windows.Forms.StatusBarPanel backgroundColorStatusBarPanel;
         private System.Windows.Forms.StatusBarPanel coordinateStatusBarPanel;
         private System.Windows.Forms.StatusBarPanel canvasSizeStatusBarPanel;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton saveToolStripButton;
         private System.Windows.Forms.ToolStripButton newToolStripButton;
         private System.Windows.Forms.ToolStripButton openToolStripButton;

@@ -139,10 +139,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Rectangle.bmp" />
-    <Content Include="Curve.bmp" />
-    <Content Include="Ellipse.bmp" />
-    <Content Include="Line.bmp" />
+    <Content Include="Image\Rectangle.bmp" />
+    <Content Include="Image\Curve.bmp" />
+    <Content Include="Image\Ellipse.bmp" />
+    <Content Include="Image\Line.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

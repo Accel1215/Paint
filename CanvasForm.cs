@@ -36,9 +36,15 @@ namespace Paint
             AutoScrollMinSize = size;
         }
 
+        private bool IsPointInWorkplace(Point point)
+        {
+            return ((point.X <= workPlaceSize.Width) && (point.Y <= workPlaceSize.Height) && 
+                   (point.X >= 0) && (point.Y >=0));
+        }
+
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            if((e.X > workPlaceSize.Width) || (e.Y > workPlaceSize.Height))
+            if(!IsPointInWorkplace(e.Location))
             {
                 return;
             }
@@ -76,11 +82,7 @@ namespace Paint
                         array.Add(new Figures.Ellipse(e.Location, e.Location, m.lineWidth, m.lineColor, m.solidColor));
                         break;
                     }
-
             }
-
-
-
         }
 
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
@@ -159,7 +161,7 @@ namespace Paint
                 {
                     MainForm mainWindow = (MainForm)MdiParent;
 
-                    mainWindow.SaveToolStripMenuItem_Click(sender, e);
+                    mainWindow.SaveFile();
                 }
                 else if(dialogResult == DialogResult.Cancel)
                 {
@@ -190,22 +192,23 @@ namespace Paint
         private bool IsFigureInCanvas(Figure f, Point p)
         {
             Type t = f.GetType();
+            Point pointWithOffset;
 
             if(t.Equals(typeof(Curve)))
             {
                 Curve curve = (Curve)f;
-                for(int i = 0; i < curve.points.Count; ++i)
+                foreach(Point i in curve.points)
                 {
-                    if ((curve.points[i].X - AutoScrollPosition.X > workPlaceSize.Width) || (curve.points[i].Y - AutoScrollPosition.Y > workPlaceSize.Height) ||
-                    (curve.points[i].X - AutoScrollPosition.X < 0) || (curve.points[i].Y - AutoScrollPosition.Y < 0))
+                    pointWithOffset = new Point(i.X - AutoScrollPosition.X, i.Y - AutoScrollPosition.Y);
+                    if (!IsPointInWorkplace(pointWithOffset))
                     {
                         return false;
                     }
                 }
             }
 
-            if ((p.X - AutoScrollPosition.X > workPlaceSize.Width) || (p.Y - AutoScrollPosition.Y > workPlaceSize.Height) ||
-                    (p.X - AutoScrollPosition.X < 0) || (p.Y - AutoScrollPosition.Y < 0))
+            pointWithOffset = new Point(p.X - AutoScrollPosition.X, p.Y - AutoScrollPosition.Y);
+            if (!IsPointInWorkplace(pointWithOffset))
             {
                 return false;
             }

@@ -48,8 +48,6 @@ namespace Paint
 
         public abstract void Draw(Graphics g, Point offset);
 
-        public abstract void DrawHash(Graphics g, Point offset);
-
         public abstract void Hide(Graphics g, Point offset);
 
         public void Normalization(ref Point pointOne, ref Point pointTwo)
@@ -87,14 +85,10 @@ namespace Paint
             }
         }
 
-        public void MouseMove(Graphics g, Point mousePosition, Point offset)
+        public virtual void MouseMove(Graphics g, Point mousePosition, Point offset)
         {
-            //Hide(g.Graphics, offset);
-
             pointTwo.X = mousePosition.X;
             pointTwo.Y = mousePosition.Y;
-
-            DrawHash(g, offset);
         }
     }
 }

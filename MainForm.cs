@@ -14,7 +14,6 @@ namespace Paint
         public Color lineColor;
         public Size canvasSize;
         public int lineWidth;
-
         public FigureType figureType;
         
 
@@ -36,62 +35,57 @@ namespace Paint
                 Text = "Picture " + MdiChildren.Length.ToString()
             };
 
-            saveToolStripMenuItem.Enabled = true;
-            saveAsToolStripMenuItem.Enabled = true;
-
-            saveToolStripButton.Enabled = true;
+            EnableSave();
 
             f.Show();
         }
 
-        public void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        public void SaveFile(bool pathDirection = false)
         {
-
             CanvasForm canvas = (CanvasForm)ActiveMdiChild;
 
-            if(canvas.FilePathSave == System.String.Empty)
+            if((canvas.FilePathSave == System.String.Empty) || (pathDirection == true))
             {
-                SaveAsToolStripMenuItem_Click(sender, e);
+                SaveFileDialog saveFileDialog = new SaveFileDialog
+                {
+                    DefaultExt = "p",
+                    Title = "Save",
+                    FileName = "Picture",
+                    InitialDirectory = Environment.CurrentDirectory
+                };
+
+                DialogResult dialogResult = saveFileDialog.ShowDialog();
+
+                if (dialogResult == DialogResult.OK)
+                {
+                    canvas.FilePathSave = saveFileDialog.FileName;
+                    canvas.Text = saveFileDialog.FileName.Substring(saveFileDialog.FileName.LastIndexOf('\\') + 1);
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            canvas.isModificated = false;
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(canvas.FilePathSave, FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter.Serialize(stream, canvas.Array);
+            formatter.Serialize(stream, canvas.workPlaceSize);
+            stream.Close();
+        }
+
+        private void SaveFileClick(object sender, EventArgs e)
+        {
+            if(sender.Equals(saveAsToolStripMenuItem))
+            {
+                SaveFile(true);
             }
             else
             {
-                canvas.isModificated = false;
-
-                BinaryFormatter formatter = new BinaryFormatter();
-                Stream stream = new FileStream(canvas.FilePathSave, FileMode.Create, FileAccess.Write, FileShare.None);
-                formatter.Serialize(stream, canvas.Array);
-                formatter.Serialize(stream, canvas.workPlaceSize);
-                stream.Close();
-            }
-
-        }
-
-        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog
-            {
-                DefaultExt = "p",
-                Title = "Save",
-                FileName = "Picture",
-                InitialDirectory = Environment.CurrentDirectory
-            };
-
-            DialogResult dialogResult = saveFileDialog.ShowDialog();
-            
-            if(dialogResult == DialogResult.OK)
-            {
-                CanvasForm canvas = (CanvasForm)ActiveMdiChild;
-
-                canvas.FilePathSave = saveFileDialog.FileName;
-                canvas.Text = saveFileDialog.FileName.Substring(saveFileDialog.FileName.LastIndexOf('\\') + 1);
-                canvas.isModificated = false;
-
-                BinaryFormatter formatter = new BinaryFormatter();
-                Stream stream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
-                formatter.Serialize(stream, canvas.Array);
-                formatter.Serialize(stream, canvas.workPlaceSize);
-                stream.Close();
-            }
+                SaveFile(false);
+            }      
         }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -113,7 +107,6 @@ namespace Paint
                 }
             }
 
-
             if(dialogResult == DialogResult.OK)
             {
                 BinaryFormatter formatter = new BinaryFormatter();
@@ -132,8 +125,7 @@ namespace Paint
                 Form f = canvas;
                 f.MdiParent = this;
 
-                saveToolStripMenuItem.Enabled = true;
-                saveAsToolStripMenuItem.Enabled = true;
+                EnableSave();
 
                 f.Show();
             }
@@ -150,7 +142,15 @@ namespace Paint
             }
         }
 
-        private void LineColorToolStripMenuItem_Click(object sender, EventArgs e)
+        public void EnableSave()
+        {
+            saveToolStripMenuItem.Enabled = true;
+            saveAsToolStripMenuItem.Enabled = true;
+
+            saveToolStripButton.Enabled = true;
+        }
+
+        private void LineColorChangeClick(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
      
@@ -161,7 +161,7 @@ namespace Paint
             }
         }
 
-        private void BackgroudColorToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BackgroudColorChangeClick(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
 
@@ -172,7 +172,7 @@ namespace Paint
             }
         }
 
-        private void LineWidthToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LineWidthChangeClick(object sender, EventArgs e)
         {
             LineForm line = new LineForm();
 
@@ -185,7 +185,7 @@ namespace Paint
             }
         }
 
-        private void PictureSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PictureSizeChangeClick(object sender, EventArgs e)
         {
             CanvasSizeForm canvasSize = new CanvasSizeForm(this.canvasSize);
 
@@ -195,7 +195,7 @@ namespace Paint
             }
         }
 
-        private void FigureChoseClick(object sender, EventArgs e)
+        private void FigureChooseClick(object sender, EventArgs e)
         {
             if(sender.Equals(lineToolStripMenuItem) || sender.Equals(lineToolStripButton))
             {
@@ -265,7 +265,7 @@ namespace Paint
         {
             penSizeStatusBarPanel.Text = Convert.ToString(lineWidth);
             
-            Graphics g = statusBar1.CreateGraphics();
+            Graphics g = statusBar.CreateGraphics();
 
             Rectangle rectangle = new Rectangle(new Point(penSizeStatusBarPanel.Width + coordinateStatusBarPanel.Width + canvasSizeStatusBarPanel.Width + 17, 4),
                 new Size(15, 15));
@@ -292,7 +292,7 @@ namespace Paint
             coordinateStatusBarPanel.Text = Convert.ToString(location.X) + 'x' + Convert.ToString(location.Y);
         }
 
-        private void StatusBar1_DrawItem(object sender, StatusBarDrawItemEventArgs sbdevent)
+        private void StatusBar_DrawItem(object sender, StatusBarDrawItemEventArgs sbdevent)
         {
             DrawStatusBar();
         }

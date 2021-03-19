@@ -45,26 +45,6 @@ namespace Paint.Figures
             solidBrush.Dispose();
         }
 
-        public override void DrawHash(Graphics g, Point offset)
-        {
-            Pen pen = new Pen(lineColor, lineSize)
-            {
-                DashStyle = System.Drawing.Drawing2D.DashStyle.Dash
-            };
-
-            Point normalPointOne = new Point(pointOne.X + offset.X, pointOne.Y + offset.Y);
-            Point normalPointTwo = new Point(pointTwo.X + offset.X, pointTwo.Y + offset.Y);
-
-            Normalization(ref normalPointOne, ref normalPointTwo);
-
-            System.Drawing.Rectangle rectangle = 
-                System.Drawing.Rectangle.FromLTRB(normalPointOne.X, normalPointOne.Y, normalPointTwo.X, normalPointTwo.Y);
-
-            g.DrawRectangle(pen, rectangle);
-
-            pen.Dispose();
-        }
-
         public override void Hide(Graphics g, Point offset)
         {
             Pen pen = new Pen(Color.White, lineSize);

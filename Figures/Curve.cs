@@ -42,24 +42,6 @@ namespace Paint.Figures
             pen.Dispose();
         }
 
-        public override void DrawHash(Graphics g, Point offset)
-        {
-            Pen pen = new Pen(lineColor, lineSize)
-            {
-                DashStyle = System.Drawing.Drawing2D.DashStyle.Dash
-            };
-
-            for (int i = 0; i < points.Count(); ++i)
-            {
-                points[i].Offset(offset);
-            }
-
-            g.DrawCurve(pen, points.ToArray());
-            points.Add(pointTwo);
-
-            pen.Dispose();
-        }
-
         public override void Hide(Graphics g, Point offset)
         {
             Pen pen = new Pen(Color.White, lineSize);
@@ -72,6 +54,14 @@ namespace Paint.Figures
             g.DrawCurve(pen, points.ToArray());
 
             pen.Dispose();
+        }
+
+        public override void MouseMove(Graphics g, Point mousePosition, Point offset)
+        {
+            pointTwo.X = mousePosition.X;
+            pointTwo.Y = mousePosition.Y;
+
+            points.Add(pointTwo);
         }
     }
 }
