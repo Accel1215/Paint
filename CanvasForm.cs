@@ -45,7 +45,7 @@ namespace Paint
 
             isMousePresed = true;
 
-            MainWindowForm m = (MainWindowForm)ParentForm;
+            MainForm m = (MainForm)ParentForm;
 
             switch (m.figureType)
             {
@@ -93,6 +93,9 @@ namespace Paint
                 //buffer.Render();
                 isMouseMoved = true;
             }
+
+            MainForm main = (MainForm)ParentForm;
+            main.DrawStatusBarCoordinate(e.Location);
         }
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
@@ -139,7 +142,7 @@ namespace Paint
 
         private void Canvas_FormClosed(object sender, FormClosedEventArgs e)
         {
-            MainWindowForm m = (MainWindowForm)ParentForm;
+            MainForm m = (MainForm)ParentForm;
             m.DisableSave();
             buffer.Dispose();
             //contex.Dispose();
@@ -154,7 +157,7 @@ namespace Paint
 
                 if(dialogResult == DialogResult.Yes)
                 {
-                    MainWindowForm mainWindow = (MainWindowForm)MdiParent;
+                    MainForm mainWindow = (MainForm)MdiParent;
 
                     mainWindow.SaveToolStripMenuItem_Click(sender, e);
                 }

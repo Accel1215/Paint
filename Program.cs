@@ -16,7 +16,7 @@ namespace Paint
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindowForm());
+            Application.Run(new MainForm());
         }
     }
 }
