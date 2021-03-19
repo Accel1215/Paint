@@ -72,6 +72,7 @@
     <Compile Include="Figures\Ellipse.cs" />
     <Compile Include="Figures\Line.cs" />
     <Compile Include="Figures\Rectangle.cs" />
+    <Compile Include="Figures\Text.cs" />
     <Compile Include="LineForm.cs">
       <SubType>Form</SubType>
     </Compile>

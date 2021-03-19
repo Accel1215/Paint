@@ -67,6 +67,7 @@
             this.curveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.rectangleToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ellipseToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coordinateStatusBarPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.canvasSizeStatusBarPanel)).BeginInit();
@@ -143,7 +144,8 @@
             this.lineColorToolStripMenuItem,
             this.backgroudColorToolStripMenuItem,
             this.lineSizeToolStripMenuItem,
-            this.pictureSizeToolStripMenuItem});
+            this.pictureSizeToolStripMenuItem,
+            this.fontToolStripMenuItem});
             this.parametrsToolStripMenuItem.Name = "parametrsToolStripMenuItem";
             this.parametrsToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.parametrsToolStripMenuItem.Text = "Parameters";
@@ -418,6 +420,13 @@
             this.ellipseToolStripButton.Text = "Ellipse";
             this.ellipseToolStripButton.Click += new System.EventHandler(this.FigureChooseClick);
             // 
+            // fontToolStripMenuItem
+            // 
+            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fontToolStripMenuItem.Text = "Font";
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.FontToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -485,6 +494,7 @@
         private System.Windows.Forms.ToolStripButton curveToolStripButton;
         private System.Windows.Forms.ToolStripButton rectangleToolStripButton;
         private System.Windows.Forms.ToolStripButton ellipseToolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
     }
 }
 

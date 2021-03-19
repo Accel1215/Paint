@@ -15,6 +15,7 @@ namespace Paint
         public Size canvasSize;
         public int lineWidth;
         public FigureType figureType;
+        public Font canvasFont;
         
 
         public MainForm()
@@ -26,6 +27,7 @@ namespace Paint
             canvasSize = new Size(640, 480);
             figureType = FigureType.Line;
             lineWidth = 1;
+            canvasFont = new Font("Times New Roman", 12);
         }
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -300,6 +302,16 @@ namespace Paint
         private void MainWindowForm_MdiChildActivate(object sender, EventArgs e)
         {
             DrawStatusBar();
+        }
+
+        private void FontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FontDialog fontDialog = new FontDialog();
+
+            if(fontDialog.ShowDialog() == DialogResult.OK)
+            {
+                canvasFont = fontDialog.Font;
+            }
         }
     }
 }
