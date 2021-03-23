@@ -45,6 +45,11 @@ namespace Paint.Figures
             solidBrush.Dispose();
         }
 
+        public override void FinishDraw(Graphics g, Point offset)
+        {
+            CheckFalidate();
+        }
+
         public override void Hide(Graphics g, Point offset)
         {
             Pen pen = new Pen(Color.White, lineSize);
@@ -66,5 +71,16 @@ namespace Paint.Figures
             solidBrush.Dispose();
         }
 
+        public override void CheckFalidate()
+        {
+            if (pointOne == pointTwo)
+            {
+                isCorrect = StatusCheck.Bad;
+            }
+            else
+            {
+                isCorrect = StatusCheck.Good;
+            }
+        }
     }
 }

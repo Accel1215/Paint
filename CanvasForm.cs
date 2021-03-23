@@ -82,6 +82,13 @@ namespace Paint
                         array.Add(new Figures.Ellipse(e.Location, e.Location, m.lineWidth, m.lineColor, m.solidColor));
                         break;
                     }
+
+                case FigureType.Text:
+                    {
+                        e.Location.Offset(AutoScrollPosition);
+                        array.Add(new Figures.Text(e.Location, e.Location, m.lineWidth, m.lineColor, m.canvasFont, this, m));
+                        break;
+                    }
             }
         }
 
@@ -92,7 +99,6 @@ namespace Paint
                 Point mousePoint = new Point(e.X - AutoScrollPosition.X, e.Y - AutoScrollPosition.Y);
                 array.Last().MouseMove(buffer.Graphics, mousePoint, AutoScrollPosition);
                 Invalidate();
-                //buffer.Render();
                 isMouseMoved = true;
             }
 
@@ -116,7 +122,7 @@ namespace Paint
                 }
                 else
                 {
-                    array.Last().Draw(buffer.Graphics, AutoScrollPosition);
+                    array.Last().FinishDraw(buffer.Graphics, AutoScrollPosition);
                     Invalidate();
                     isModificated = true; 
                 }
@@ -134,11 +140,19 @@ namespace Paint
 
             buffer.Graphics.FillRectangle(solidBrush, rectangle);
 
+            for(int i = 0; i < array.Count(); ++i)
+            {
+                if (array[i].isCorrect == StatusCheck.Bad)
+                {
+                    array.RemoveAt(i);
+                }
+            }
+
             foreach (Figure i in array)
             {
                 i.Draw(buffer.Graphics, AutoScrollPosition);
             }
-
+            
             buffer.Render(e.Graphics);
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paint.Figures;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -12,9 +13,16 @@ namespace Paint
         Line = 0,
         Curve = 1,
         Rectangle = 2,
-        Ellipse = 3
+        Ellipse = 3,
+        Text = 4
     }
 
+    public enum StatusCheck
+    {
+        NotChecked = 0,
+        Good = 1,
+        Bad = 2
+    }
 
     [Serializable()]
     abstract class Figure
@@ -24,6 +32,8 @@ namespace Paint
 
         protected Color lineColor;
         protected int lineSize;
+
+        public StatusCheck isCorrect = StatusCheck.NotChecked;
 
         public Figure(Point pointOne, Point pointTwo, int lineSize, Color lineColor)
         {
@@ -49,6 +59,8 @@ namespace Paint
         public abstract void Draw(Graphics g, Point offset);
 
         public abstract void Hide(Graphics g, Point offset);
+
+        public abstract void FinishDraw(Graphics g, Point offset);
 
         public void Normalization(ref Point pointOne, ref Point pointTwo)
         {
@@ -90,5 +102,7 @@ namespace Paint
             pointTwo.X = mousePosition.X;
             pointTwo.Y = mousePosition.Y;
         }
+
+        public abstract void CheckFalidate();
     }
 }

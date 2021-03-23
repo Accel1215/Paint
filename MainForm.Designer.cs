@@ -41,11 +41,13 @@
             this.backgroudColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lineSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.figureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.curveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rectangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ellipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusBar = new System.Windows.Forms.StatusBar();
             this.coordinateStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
             this.canvasSizeStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
@@ -67,7 +69,9 @@
             this.curveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.rectangleToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ellipseToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textStripButton = new System.Windows.Forms.ToolStripButton();
+            this.fontStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
+            this.fontSizeStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coordinateStatusBarPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.canvasSizeStatusBarPanel)).BeginInit();
@@ -75,6 +79,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.penColorStatusBarPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backgroundColorStatusBarPanel)).BeginInit();
             this.toolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fontStatusBarPanel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fontSizeStatusBarPanel)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -179,13 +185,21 @@
             this.pictureSizeToolStripMenuItem.Text = "Picture size";
             this.pictureSizeToolStripMenuItem.Click += new System.EventHandler(this.PictureSizeChangeClick);
             // 
+            // fontToolStripMenuItem
+            // 
+            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.fontToolStripMenuItem.Text = "Font";
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.FontToolStripMenuItem_Click);
+            // 
             // figureToolStripMenuItem
             // 
             this.figureToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lineToolStripMenuItem,
             this.curveToolStripMenuItem,
             this.rectangleToolStripMenuItem,
-            this.ellipseToolStripMenuItem});
+            this.ellipseToolStripMenuItem,
+            this.textToolStripMenuItem});
             this.figureToolStripMenuItem.Name = "figureToolStripMenuItem";
             this.figureToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.figureToolStripMenuItem.Text = "Figure";
@@ -220,6 +234,13 @@
             this.ellipseToolStripMenuItem.Text = "Ellipse";
             this.ellipseToolStripMenuItem.Click += new System.EventHandler(this.FigureChooseClick);
             // 
+            // textToolStripMenuItem
+            // 
+            this.textToolStripMenuItem.Name = "textToolStripMenuItem";
+            this.textToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.textToolStripMenuItem.Text = "Text";
+            this.textToolStripMenuItem.Click += new System.EventHandler(this.FigureChooseClick);
+            // 
             // statusBar
             // 
             this.statusBar.Location = new System.Drawing.Point(0, 734);
@@ -229,7 +250,9 @@
             this.canvasSizeStatusBarPanel,
             this.penSizeStatusBarPanel,
             this.penColorStatusBarPanel,
-            this.backgroundColorStatusBarPanel});
+            this.backgroundColorStatusBarPanel,
+            this.fontStatusBarPanel,
+            this.fontSizeStatusBarPanel});
             this.statusBar.ShowPanels = true;
             this.statusBar.Size = new System.Drawing.Size(1288, 22);
             this.statusBar.TabIndex = 3;
@@ -282,7 +305,8 @@
             this.lineToolStripButton,
             this.curveToolStripButton,
             this.rectangleToolStripButton,
-            this.ellipseToolStripButton});
+            this.ellipseToolStripButton,
+            this.textStripButton});
             this.toolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
@@ -420,12 +444,25 @@
             this.ellipseToolStripButton.Text = "Ellipse";
             this.ellipseToolStripButton.Click += new System.EventHandler(this.FigureChooseClick);
             // 
-            // fontToolStripMenuItem
+            // textStripButton
             // 
-            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
-            this.fontToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.fontToolStripMenuItem.Text = "Font";
-            this.fontToolStripMenuItem.Click += new System.EventHandler(this.FontToolStripMenuItem_Click);
+            this.textStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.textStripButton.Image = ((System.Drawing.Image)(resources.GetObject("textStripButton.Image")));
+            this.textStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.textStripButton.Name = "textStripButton";
+            this.textStripButton.Size = new System.Drawing.Size(23, 22);
+            this.textStripButton.Text = "toolStripButton1";
+            this.textStripButton.Click += new System.EventHandler(this.FigureChooseClick);
+            // 
+            // fontStatusBarPanel
+            // 
+            this.fontStatusBarPanel.Name = "fontStatusBarPanel";
+            this.fontStatusBarPanel.ToolTipText = "Font";
+            // 
+            // fontSizeStatusBarPanel
+            // 
+            this.fontSizeStatusBarPanel.Name = "fontSizeStatusBarPanel";
+            this.fontSizeStatusBarPanel.ToolTipText = "Font size";
             // 
             // MainForm
             // 
@@ -449,6 +486,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.backgroundColorStatusBarPanel)).EndInit();
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fontStatusBarPanel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fontSizeStatusBarPanel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -495,6 +534,10 @@
         private System.Windows.Forms.ToolStripButton rectangleToolStripButton;
         private System.Windows.Forms.ToolStripButton ellipseToolStripButton;
         private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton textStripButton;
+        private System.Windows.Forms.StatusBarPanel fontStatusBarPanel;
+        private System.Windows.Forms.StatusBarPanel fontSizeStatusBarPanel;
     }
 }
 

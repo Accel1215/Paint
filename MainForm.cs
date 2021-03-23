@@ -215,6 +215,10 @@ namespace Paint
             {
                 ChangeFigure(FigureType.Ellipse);
             }
+            else if(sender.Equals(textToolStripMenuItem) || sender.Equals(textStripButton))
+            {
+                ChangeFigure(FigureType.Text);
+            }
         }
 
         private void ChangeFigure(FigureType figure)
@@ -226,11 +230,14 @@ namespace Paint
             rectangleToolStripMenuItem.Checked = false;
             curveToolStripMenuItem.Checked = false;
             ellipseToolStripMenuItem.Checked = false;
+            textToolStripMenuItem.Checked = false;
 
+            backgroundColorToolStripButton.Checked = false;
             lineToolStripButton.Checked = false;
             rectangleToolStripButton.Checked = false;
             curveToolStripButton.Checked = false;
             ellipseToolStripButton.Checked = false;
+            textToolStripMenuItem.Checked = false;
 
             switch (figure)
             {
@@ -258,6 +265,12 @@ namespace Paint
                         backgroudColorToolStripMenuItem.Enabled = true;
                         ellipseToolStripMenuItem.Checked = true;
                         ellipseToolStripButton.Checked = true;
+                        break;
+                    }
+                case FigureType.Text:
+                    {
+                        textStripButton.Checked = true;
+                        textToolStripMenuItem.Checked = true;
                         break;
                     }
             }
@@ -292,6 +305,18 @@ namespace Paint
         public void DrawStatusBarCoordinate(Point location)
         {
             coordinateStatusBarPanel.Text = Convert.ToString(location.X) + 'x' + Convert.ToString(location.Y);
+        }
+
+        public void DrawStatusBarFont()
+        {
+            fontStatusBarPanel.Text = canvasFont.Name;
+            fontSizeStatusBarPanel.Text = Convert.ToString(canvasFont.Size);
+        }
+
+        public void EraseStatusBarFont()
+        {
+            fontSizeStatusBarPanel.Text = System.String.Empty;
+            fontStatusBarPanel.Text = System.String.Empty;
         }
 
         private void StatusBar_DrawItem(object sender, StatusBarDrawItemEventArgs sbdevent)
