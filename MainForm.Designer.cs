@@ -54,6 +54,8 @@
             this.penSizeStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
             this.penColorStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
             this.backgroundColorStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
+            this.fontStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
+            this.fontSizeStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -62,6 +64,7 @@
             this.penSizeToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.penColorToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.backgroundColorToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.fontToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.canvasSizeToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -69,18 +72,16 @@
             this.curveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.rectangleToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ellipseToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.textStripButton = new System.Windows.Forms.ToolStripButton();
-            this.fontStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
-            this.fontSizeStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
+            this.textToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coordinateStatusBarPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.canvasSizeStatusBarPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.penSizeStatusBarPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.penColorStatusBarPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backgroundColorStatusBarPanel)).BeginInit();
-            this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fontStatusBarPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeStatusBarPanel)).BeginInit();
+            this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -190,7 +191,7 @@
             this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
             this.fontToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.fontToolStripMenuItem.Text = "Font";
-            this.fontToolStripMenuItem.Click += new System.EventHandler(this.FontToolStripMenuItem_Click);
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.FontChangeClick);
             // 
             // figureToolStripMenuItem
             // 
@@ -289,6 +290,16 @@
             this.backgroundColorStatusBarPanel.ToolTipText = "Background color";
             this.backgroundColorStatusBarPanel.Width = 50;
             // 
+            // fontStatusBarPanel
+            // 
+            this.fontStatusBarPanel.Name = "fontStatusBarPanel";
+            this.fontStatusBarPanel.ToolTipText = "Font";
+            // 
+            // fontSizeStatusBarPanel
+            // 
+            this.fontSizeStatusBarPanel.Name = "fontSizeStatusBarPanel";
+            this.fontSizeStatusBarPanel.ToolTipText = "Font size";
+            // 
             // toolStrip
             // 
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -299,6 +310,7 @@
             this.penSizeToolStripButton,
             this.penColorToolStripButton,
             this.backgroundColorToolStripButton,
+            this.fontToolStripButton,
             this.toolStripSeparator2,
             this.canvasSizeToolStripButton,
             this.toolStripSeparator3,
@@ -306,7 +318,7 @@
             this.curveToolStripButton,
             this.rectangleToolStripButton,
             this.ellipseToolStripButton,
-            this.textStripButton});
+            this.textToolStripButton});
             this.toolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
@@ -382,6 +394,16 @@
             this.backgroundColorToolStripButton.Text = "Fill";
             this.backgroundColorToolStripButton.Click += new System.EventHandler(this.BackgroudColorChangeClick);
             // 
+            // fontToolStripButton
+            // 
+            this.fontToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fontToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("fontToolStripButton.Image")));
+            this.fontToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fontToolStripButton.Name = "fontToolStripButton";
+            this.fontToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.fontToolStripButton.Text = "Font";
+            this.fontToolStripButton.Click += new System.EventHandler(this.FontChangeClick);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -444,25 +466,15 @@
             this.ellipseToolStripButton.Text = "Ellipse";
             this.ellipseToolStripButton.Click += new System.EventHandler(this.FigureChooseClick);
             // 
-            // textStripButton
+            // textToolStripButton
             // 
-            this.textStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.textStripButton.Image = ((System.Drawing.Image)(resources.GetObject("textStripButton.Image")));
-            this.textStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.textStripButton.Name = "textStripButton";
-            this.textStripButton.Size = new System.Drawing.Size(23, 22);
-            this.textStripButton.Text = "toolStripButton1";
-            this.textStripButton.Click += new System.EventHandler(this.FigureChooseClick);
-            // 
-            // fontStatusBarPanel
-            // 
-            this.fontStatusBarPanel.Name = "fontStatusBarPanel";
-            this.fontStatusBarPanel.ToolTipText = "Font";
-            // 
-            // fontSizeStatusBarPanel
-            // 
-            this.fontSizeStatusBarPanel.Name = "fontSizeStatusBarPanel";
-            this.fontSizeStatusBarPanel.ToolTipText = "Font size";
+            this.textToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.textToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("textToolStripButton.Image")));
+            this.textToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.textToolStripButton.Name = "textToolStripButton";
+            this.textToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.textToolStripButton.Text = "Text";
+            this.textToolStripButton.Click += new System.EventHandler(this.FigureChooseClick);
             // 
             // MainForm
             // 
@@ -484,10 +496,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.penSizeStatusBarPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.penColorStatusBarPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.backgroundColorStatusBarPanel)).EndInit();
-            this.toolStrip.ResumeLayout(false);
-            this.toolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fontStatusBarPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeStatusBarPanel)).EndInit();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -535,9 +547,10 @@
         private System.Windows.Forms.ToolStripButton ellipseToolStripButton;
         private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton textStripButton;
+        private System.Windows.Forms.ToolStripButton textToolStripButton;
         private System.Windows.Forms.StatusBarPanel fontStatusBarPanel;
         private System.Windows.Forms.StatusBarPanel fontSizeStatusBarPanel;
+        private System.Windows.Forms.ToolStripButton fontToolStripButton;
     }
 }
 

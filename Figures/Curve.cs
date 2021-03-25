@@ -10,7 +10,10 @@ namespace Paint.Figures
     [Serializable()]
     class Curve : Figure
     {
-        public List<Point> points;
+        private List<Point> points;
+
+        public List<Point> Points => points;
+
 
         public Curve(Point pointOne, Point pointTwo, int lineSize, Color lineColor) :
             base(pointOne, pointTwo, lineSize, lineColor)
@@ -42,11 +45,6 @@ namespace Paint.Figures
             pen.Dispose();
         }
 
-        public override void FinishDraw(Graphics g, Point offset)
-        {
-            CheckFalidate();
-        }
-
         public override void Hide(Graphics g, Point offset)
         {
             Pen pen = new Pen(Color.White, lineSize);
@@ -61,24 +59,29 @@ namespace Paint.Figures
             pen.Dispose();
         }
 
+        public override void FinishDraw(Graphics g, Point offset)
+        {
+            Falidate();
+        }
+
+        public override void Falidate()
+        {
+            if (points.Count() == 2)
+            {
+                falidateStatus = StatusCheck.Bad;
+            }
+            else
+            {
+                falidateStatus = StatusCheck.Good;
+            }
+        }
+
         public override void MouseMove(Graphics g, Point mousePosition, Point offset)
         {
             pointTwo.X = mousePosition.X;
             pointTwo.Y = mousePosition.Y;
 
             points.Add(pointTwo);
-        }
-
-        public override void CheckFalidate()
-        {
-            if(points.Count() == 2)
-            {
-                isCorrect = StatusCheck.Bad;
-            }
-            else
-            {
-                isCorrect = StatusCheck.Good;
-            }
         }
     }
 }

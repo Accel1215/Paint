@@ -25,7 +25,7 @@ namespace Paint
     }
 
     [Serializable()]
-    abstract class Figure
+    abstract public class Figure
     {
         protected Point pointOne;
         protected Point pointTwo;
@@ -33,7 +33,7 @@ namespace Paint
         protected Color lineColor;
         protected int lineSize;
 
-        public StatusCheck isCorrect = StatusCheck.NotChecked;
+        public StatusCheck falidateStatus = StatusCheck.NotChecked;
 
         public Figure(Point pointOne, Point pointTwo, int lineSize, Color lineColor)
         {
@@ -61,6 +61,14 @@ namespace Paint
         public abstract void Hide(Graphics g, Point offset);
 
         public abstract void FinishDraw(Graphics g, Point offset);
+
+        public abstract void Falidate();
+
+        public virtual void MouseMove(Graphics g, Point mousePosition, Point offset)
+        {
+            pointTwo.X = mousePosition.X;
+            pointTwo.Y = mousePosition.Y;
+        }
 
         public void Normalization(ref Point pointOne, ref Point pointTwo)
         {
@@ -97,12 +105,5 @@ namespace Paint
             }
         }
 
-        public virtual void MouseMove(Graphics g, Point mousePosition, Point offset)
-        {
-            pointTwo.X = mousePosition.X;
-            pointTwo.Y = mousePosition.Y;
-        }
-
-        public abstract void CheckFalidate();
     }
 }

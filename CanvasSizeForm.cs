@@ -12,7 +12,9 @@ namespace Paint
 {
     public partial class CanvasSizeForm : Form
     {
-        public Size size;
+        private Size canvasSize;
+
+        public Size CanvasSize { get => canvasSize; }
 
         public CanvasSizeForm(Size size)
         {
@@ -42,21 +44,21 @@ namespace Paint
         {
             if(customSizeCheckBox.Checked == true)
             {
-                size = new Size(Convert.ToInt32(widthTextBox.Text), Convert.ToInt32(heightTextBox.Text));
+                canvasSize = new Size(Convert.ToInt32(widthTextBox.Text), Convert.ToInt32(heightTextBox.Text));
             }
             else
             {
                 if(smallSizeRadioButton.Checked == true)
                 {
-                    size = new Size(320, 240);
+                    canvasSize = new Size(320, 240);
                 }
                 else if (mediumSizeRadioButtom.Checked == true)
                 {
-                    size = new Size(640, 480);
+                    canvasSize = new Size(640, 480);
                 }
                 else if(largeSizeRadioBottom.Checked == true)
                 {
-                    size = new Size(800, 600);
+                    canvasSize = new Size(800, 600);
                 }
             }
         }
@@ -65,7 +67,7 @@ namespace Paint
         {
             if(customSizeCheckBox.Checked == true)
             {
-                groupBox1.Enabled = false;
+                radioButtomGroupBox.Enabled = false;
 
                 widthTextBox.Enabled = true;
                 heightTextBox.Enabled = true;
@@ -92,12 +94,10 @@ namespace Paint
                 widthLabel.Enabled = false;
                 xLabel.Enabled = false;
 
-                groupBox1.Enabled = true;
+                radioButtomGroupBox.Enabled = true;
 
                 OkButton.Enabled = true;
-
             }
-
         }
 
         private void WidthSizeTextBox_KeyPress(object sender, KeyPressEventArgs e)

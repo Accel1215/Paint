@@ -10,7 +10,8 @@ namespace Paint.Figures
     [Serializable()]
     class Ellipse : Figure
     {
-        public Color solidColor;
+        private Color solidColor;
+
 
         public Ellipse(Point pointOne, Point pointTwo, int lineSize, Color lineColor, Color fillColor) :
             base(pointOne, pointTwo, lineSize, lineColor)
@@ -45,11 +46,6 @@ namespace Paint.Figures
             solidBrush.Dispose();
         }
 
-        public override void FinishDraw(Graphics g, Point offset)
-        {
-            CheckFalidate();
-        }
-
         public override void Hide(Graphics g, Point offset)
         {
             Pen pen = new Pen(Color.White, lineSize);
@@ -71,15 +67,20 @@ namespace Paint.Figures
             solidBrush.Dispose();
         }
 
-        public override void CheckFalidate()
+        public override void FinishDraw(Graphics g, Point offset)
+        {
+            Falidate();
+        }
+
+        public override void Falidate()
         {
             if(pointOne == pointTwo)
             {
-                isCorrect = StatusCheck.Bad;
+                falidateStatus = StatusCheck.Bad;
             }
             else
             {
-                isCorrect = StatusCheck.Good;
+                falidateStatus = StatusCheck.Good;
             }
         }
     }

@@ -10,7 +10,8 @@ namespace Paint.Figures
     [Serializable()]
     class Rectangle : Figure
     {
-        public Color solidColor;
+        private Color solidColor;
+
 
         public Rectangle(Point pointOne, Point pointTwo, int lineSize, Color lineColor, Color fillColor) : 
             base(pointOne, pointTwo, lineSize, lineColor) 
@@ -45,11 +46,6 @@ namespace Paint.Figures
             solidBrush.Dispose();
         }
 
-        public override void FinishDraw(Graphics g, Point offset)
-        {
-            CheckFalidate();
-        }
-
         public override void Hide(Graphics g, Point offset)
         {
             Pen pen = new Pen(Color.White, lineSize);
@@ -61,7 +57,7 @@ namespace Paint.Figures
 
             Normalization(ref normalPointOne, ref normalPointTwo);
 
-            System.Drawing.Rectangle rectangle = 
+            System.Drawing.Rectangle rectangle =
                 System.Drawing.Rectangle.FromLTRB(normalPointOne.X, normalPointOne.Y, normalPointTwo.X, normalPointTwo.Y);
 
             g.FillRectangle(solidBrush, rectangle);
@@ -71,15 +67,20 @@ namespace Paint.Figures
             solidBrush.Dispose();
         }
 
-        public override void CheckFalidate()
+        public override void FinishDraw(Graphics g, Point offset)
+        {
+            Falidate();
+        }
+
+        public override void Falidate()
         {
             if (pointOne == pointTwo)
             {
-                isCorrect = StatusCheck.Bad;
+                falidateStatus = StatusCheck.Bad;
             }
             else
             {
-                isCorrect = StatusCheck.Good;
+                falidateStatus = StatusCheck.Good;
             }
         }
     }

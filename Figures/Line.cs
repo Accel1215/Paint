@@ -25,16 +25,9 @@ namespace Paint.Figures
             Point pointOneOffset = new Point(pointOne.X + offset.X, pointOne.Y + offset.Y);
             Point pointTwoOffset = new Point(pointTwo.X + offset.X, pointTwo.Y + offset.Y);
 
-            //Normalization(ref normalPointOne, ref normalPointTwo);
-
             g.DrawLine(pen, pointOneOffset, pointTwoOffset);
 
             pen.Dispose();
-        }
-
-        public override void FinishDraw(Graphics g, Point offset)
-        {
-            CheckFalidate();
         }
 
         public override void Hide(Graphics g, Point offset)
@@ -44,22 +37,25 @@ namespace Paint.Figures
             Point pointOneOffset = new Point(pointOne.X + offset.X, pointOne.Y + offset.Y);
             Point pointTwoOffset = new Point(pointTwo.X + offset.X, pointTwo.Y + offset.Y);
 
-            //Normalization(ref normalPointOne, ref normalPointTwo);
-
             g.DrawLine(pen, pointOneOffset, pointTwoOffset);
 
             pen.Dispose();
         }
 
-        public override void CheckFalidate()
+        public override void FinishDraw(Graphics g, Point offset)
+        {
+            Falidate();
+        }
+
+        public override void Falidate()
         {
             if (pointOne == pointTwo)
             {
-                isCorrect = StatusCheck.Bad;
+                falidateStatus = StatusCheck.Bad;
             }
             else
             {
-                isCorrect = StatusCheck.Good;
+                falidateStatus = StatusCheck.Good;
             }
         }
     }

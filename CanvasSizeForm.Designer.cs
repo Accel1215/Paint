@@ -30,7 +30,7 @@
         {
             this.OkButton = new System.Windows.Forms.Button();
             this.CanselButton = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButtomGroupBox = new System.Windows.Forms.GroupBox();
             this.largeSizeRadioBottom = new System.Windows.Forms.RadioButton();
             this.mediumSizeRadioButtom = new System.Windows.Forms.RadioButton();
             this.smallSizeRadioButton = new System.Windows.Forms.RadioButton();
@@ -40,7 +40,7 @@
             this.heightLabel = new System.Windows.Forms.Label();
             this.widthLabel = new System.Windows.Forms.Label();
             this.xLabel = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.radioButtomGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // OkButton
@@ -64,17 +64,17 @@
             this.CanselButton.Text = "Cansel";
             this.CanselButton.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // radioButtomGroupBox
             // 
-            this.groupBox1.Controls.Add(this.largeSizeRadioBottom);
-            this.groupBox1.Controls.Add(this.mediumSizeRadioButtom);
-            this.groupBox1.Controls.Add(this.smallSizeRadioButton);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(316, 67);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Size of picture";
+            this.radioButtomGroupBox.Controls.Add(this.largeSizeRadioBottom);
+            this.radioButtomGroupBox.Controls.Add(this.mediumSizeRadioButtom);
+            this.radioButtomGroupBox.Controls.Add(this.smallSizeRadioButton);
+            this.radioButtomGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.radioButtomGroupBox.Name = "radioButtomGroupBox";
+            this.radioButtomGroupBox.Size = new System.Drawing.Size(316, 67);
+            this.radioButtomGroupBox.TabIndex = 2;
+            this.radioButtomGroupBox.TabStop = false;
+            this.radioButtomGroupBox.Text = "Size of picture";
             // 
             // largeSizeRadioBottom
             // 
@@ -183,7 +183,7 @@
             this.Controls.Add(this.customSizeCheckBox);
             this.Controls.Add(this.heightTextBox);
             this.Controls.Add(this.widthTextBox);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.radioButtomGroupBox);
             this.Controls.Add(this.CanselButton);
             this.Controls.Add(this.OkButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -191,8 +191,8 @@
             this.Name = "CanvasSizeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Canvas size";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.radioButtomGroupBox.ResumeLayout(false);
+            this.radioButtomGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,7 +202,7 @@
 
         private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.Button CanselButton;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox radioButtomGroupBox;
         private System.Windows.Forms.RadioButton largeSizeRadioBottom;
         private System.Windows.Forms.RadioButton mediumSizeRadioButtom;
         private System.Windows.Forms.RadioButton smallSizeRadioButton;

@@ -140,10 +140,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Image\Background.bmp" />
+    <Content Include="Image\CanvasSize.bmp" />
+    <Content Include="Image\Font.bmp" />
+    <Content Include="Image\LineColor.bmp" />
+    <Content Include="Image\New.bmp" />
+    <Content Include="Image\Open.bmp" />
     <Content Include="Image\Rectangle.bmp" />
     <Content Include="Image\Curve.bmp" />
     <Content Include="Image\Ellipse.bmp" />
     <Content Include="Image\Line.bmp" />
+    <Content Include="Image\Save.bmp" />
+    <Content Include="Image\Size.bmp" />
+    <Content Include="Image\Text.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

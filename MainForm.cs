@@ -10,25 +10,29 @@ namespace Paint
 {
     public partial class MainForm : Form
     {
-        public Color solidColor;
-        public Color lineColor;
-        public Size canvasSize;
-        public int lineWidth;
-        public FigureType figureType;
-        public Font canvasFont;
+        private Color solidColor = Color.White;
+        private Color lineColor = Color.Black;
+        private Size canvasSize = new Size(640, 480);
+        private int lineWidth = 1;
+        private FigureType figure = FigureType.Line;
+        private Font canvasFont = new Font("Times New Roman", 12);
         
+        public Color SolidColor { get => solidColor; }
+
+        public Color LineColor { get => lineColor; }
+
+        public int LineWidth { get => lineWidth; }
+
+        public FigureType Figure { get => figure; }
+
+        public Font CanvasFont { get => canvasFont; }
+
 
         public MainForm()
         {
             InitializeComponent();
-
-            solidColor = Color.White;
-            lineColor = Color.Black;
-            canvasSize = new Size(640, 480);
-            figureType = FigureType.Line;
-            lineWidth = 1;
-            canvasFont = new Font("Times New Roman", 12);
         }
+
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form f = new CanvasForm(canvasSize)
@@ -42,52 +46,16 @@ namespace Paint
             f.Show();
         }
 
-        public void SaveFile(bool pathDirection = false)
-        {
-            CanvasForm canvas = (CanvasForm)ActiveMdiChild;
-
-            if((canvas.FilePathSave == System.String.Empty) || (pathDirection == true))
-            {
-                SaveFileDialog saveFileDialog = new SaveFileDialog
-                {
-                    DefaultExt = "p",
-                    Title = "Save",
-                    FileName = "Picture",
-                    InitialDirectory = Environment.CurrentDirectory
-                };
-
-                DialogResult dialogResult = saveFileDialog.ShowDialog();
-
-                if (dialogResult == DialogResult.OK)
-                {
-                    canvas.FilePathSave = saveFileDialog.FileName;
-                    canvas.Text = saveFileDialog.FileName.Substring(saveFileDialog.FileName.LastIndexOf('\\') + 1);
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            canvas.isModificated = false;
-
-            BinaryFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(canvas.FilePathSave, FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter.Serialize(stream, canvas.Array);
-            formatter.Serialize(stream, canvas.workPlaceSize);
-            stream.Close();
-        }
-
         private void SaveFileClick(object sender, EventArgs e)
         {
-            if(sender.Equals(saveAsToolStripMenuItem))
+            if (sender.Equals(saveAsToolStripMenuItem))
             {
                 SaveFile(true);
             }
             else
             {
                 SaveFile(false);
-            }      
+            }
         }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -99,17 +67,17 @@ namespace Paint
 
             DialogResult dialogResult = openFileDialog.ShowDialog();
 
-            for (int i = 0; i < MdiChildren.Length; ++i) 
+            for (int i = 0; i < MdiChildren.Length; ++i)
             {
                 CanvasForm canvas = (CanvasForm)MdiChildren[i];
-                if(canvas.FilePathSave == openFileDialog.FileName)
+                if (canvas.FilePathSave == openFileDialog.FileName)
                 {
                     MessageBox.Show("File with this name is already open");
                     return;
                 }
             }
 
-            if(dialogResult == DialogResult.OK)
+            if (dialogResult == DialogResult.OK)
             {
                 BinaryFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -133,30 +101,11 @@ namespace Paint
             }
         }
 
-        public void DisableSave()
-        {
-            if (MdiChildren.Length <= 1)
-            {
-                saveToolStripMenuItem.Enabled = false;
-                saveAsToolStripMenuItem.Enabled = false;
-
-                saveToolStripButton.Enabled = false;
-            }
-        }
-
-        public void EnableSave()
-        {
-            saveToolStripMenuItem.Enabled = true;
-            saveAsToolStripMenuItem.Enabled = true;
-
-            saveToolStripButton.Enabled = true;
-        }
-
         private void LineColorChangeClick(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
-     
-            if(colorDialog.ShowDialog() == DialogResult.OK)
+
+            if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 lineColor = colorDialog.Color;
                 DrawStatusBar();
@@ -180,7 +129,7 @@ namespace Paint
 
             line.SetWidth(lineWidth);
 
-            if(line.ShowDialog() == DialogResult.OK)
+            if (line.ShowDialog() == DialogResult.OK)
             {
                 lineWidth = line.GetWidth();
                 DrawStatusBar();
@@ -191,39 +140,114 @@ namespace Paint
         {
             CanvasSizeForm canvasSize = new CanvasSizeForm(this.canvasSize);
 
-            if(canvasSize.ShowDialog() == DialogResult.OK)
+            if (canvasSize.ShowDialog() == DialogResult.OK)
             {
-                this.canvasSize = canvasSize.size;
+                this.canvasSize = canvasSize.CanvasSize;
             }
         }
 
         private void FigureChooseClick(object sender, EventArgs e)
         {
-            if(sender.Equals(lineToolStripMenuItem) || sender.Equals(lineToolStripButton))
+            if (sender.Equals(lineToolStripMenuItem) || sender.Equals(lineToolStripButton))
             {
                 ChangeFigure(FigureType.Line);
             }
-            else if(sender.Equals(curveToolStripMenuItem) || sender.Equals(curveToolStripButton))
+            else if (sender.Equals(curveToolStripMenuItem) || sender.Equals(curveToolStripButton))
             {
                 ChangeFigure(FigureType.Curve);
             }
-            else if(sender.Equals(rectangleToolStripMenuItem) || sender.Equals(rectangleToolStripButton))
+            else if (sender.Equals(rectangleToolStripMenuItem) || sender.Equals(rectangleToolStripButton))
             {
                 ChangeFigure(FigureType.Rectangle);
             }
-            else if(sender.Equals(ellipseToolStripMenuItem) || sender.Equals(ellipseToolStripButton))
+            else if (sender.Equals(ellipseToolStripMenuItem) || sender.Equals(ellipseToolStripButton))
             {
                 ChangeFigure(FigureType.Ellipse);
             }
-            else if(sender.Equals(textToolStripMenuItem) || sender.Equals(textStripButton))
+            else if (sender.Equals(textToolStripMenuItem) || sender.Equals(textToolStripButton))
             {
                 ChangeFigure(FigureType.Text);
             }
         }
 
-        private void ChangeFigure(FigureType figure)
+        private void StatusBar_DrawItem(object sender, StatusBarDrawItemEventArgs sbdevent)
         {
-            figureType = figure;
+            DrawStatusBar();
+        }
+
+        private void MainWindowForm_MdiChildActivate(object sender, EventArgs e)
+        {
+            DrawStatusBar();
+        }
+
+        private void FontChangeClick(object sender, EventArgs e)
+        {
+            FontDialog fontDialog = new FontDialog();
+
+            if (fontDialog.ShowDialog() == DialogResult.OK)
+            {
+                canvasFont = fontDialog.Font;
+            }
+        }
+
+        public void SaveFile(bool specifyPath = false)
+        {
+            CanvasForm canvas = (CanvasForm)ActiveMdiChild;
+
+            if((canvas.FilePathSave == System.String.Empty) || (specifyPath == true))
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog
+                {
+                    DefaultExt = "pic",
+                    Title = "Save",
+                    FileName = "Picture",
+                    InitialDirectory = Environment.CurrentDirectory
+                };
+
+                DialogResult dialogResult = saveFileDialog.ShowDialog();
+
+                if (dialogResult == DialogResult.OK)
+                {
+                    canvas.FilePathSave = saveFileDialog.FileName;
+                    canvas.Text = saveFileDialog.FileName.Substring(saveFileDialog.FileName.LastIndexOf('\\') + 1);
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            canvas.Modificated = false;
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(canvas.FilePathSave, FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter.Serialize(stream, canvas.Array);
+            formatter.Serialize(stream, canvas.WorkPlaceSize);
+            stream.Close();
+        }
+
+        public void DisableSave()
+        {
+            if (MdiChildren.Length <= 1)
+            {
+                saveToolStripMenuItem.Enabled = false;
+                saveAsToolStripMenuItem.Enabled = false;
+
+                saveToolStripButton.Enabled = false;
+            }
+        }
+
+        public void EnableSave()
+        {
+            saveToolStripMenuItem.Enabled = true;
+            saveAsToolStripMenuItem.Enabled = true;
+
+            saveToolStripButton.Enabled = true;
+        }
+
+        private void ChangeFigure(FigureType f)
+        {
+            figure = f;
 
             backgroudColorToolStripMenuItem.Enabled = false;
             lineToolStripMenuItem.Checked = false;
@@ -232,12 +256,12 @@ namespace Paint
             ellipseToolStripMenuItem.Checked = false;
             textToolStripMenuItem.Checked = false;
 
-            backgroundColorToolStripButton.Checked = false;
+            backgroundColorToolStripButton.Enabled = false;
             lineToolStripButton.Checked = false;
             rectangleToolStripButton.Checked = false;
             curveToolStripButton.Checked = false;
             ellipseToolStripButton.Checked = false;
-            textToolStripMenuItem.Checked = false;
+            textToolStripButton.Checked = false;
 
             switch (figure)
             {
@@ -255,6 +279,7 @@ namespace Paint
                     }
                 case FigureType.Rectangle:
                     {
+                        backgroundColorToolStripButton.Enabled = true;
                         backgroudColorToolStripMenuItem.Enabled = true;
                         rectangleToolStripMenuItem.Checked = true;
                         rectangleToolStripButton.Checked = true;
@@ -262,6 +287,7 @@ namespace Paint
                     }
                 case FigureType.Ellipse:
                     {
+                        backgroundColorToolStripButton.Enabled = true;
                         backgroudColorToolStripMenuItem.Enabled = true;
                         ellipseToolStripMenuItem.Checked = true;
                         ellipseToolStripButton.Checked = true;
@@ -269,7 +295,7 @@ namespace Paint
                     }
                 case FigureType.Text:
                     {
-                        textStripButton.Checked = true;
+                        textToolStripButton.Checked = true;
                         textToolStripMenuItem.Checked = true;
                         break;
                     }
@@ -293,7 +319,7 @@ namespace Paint
             if (ActiveMdiChild != null)
             {
                 CanvasForm canvasForm = (CanvasForm)ActiveMdiChild;
-                canvasSizeStatusBarPanel.Text = Convert.ToString(canvasForm.workPlaceSize.Width) + "x" + Convert.ToString(canvasForm.workPlaceSize.Height);
+                canvasSizeStatusBarPanel.Text = Convert.ToString(canvasForm.WorkPlaceSize.Width) + "x" + Convert.ToString(canvasForm.WorkPlaceSize.Height);
             }
             else
             {
@@ -317,26 +343,6 @@ namespace Paint
         {
             fontSizeStatusBarPanel.Text = System.String.Empty;
             fontStatusBarPanel.Text = System.String.Empty;
-        }
-
-        private void StatusBar_DrawItem(object sender, StatusBarDrawItemEventArgs sbdevent)
-        {
-            DrawStatusBar();
-        }
-
-        private void MainWindowForm_MdiChildActivate(object sender, EventArgs e)
-        {
-            DrawStatusBar();
-        }
-
-        private void FontToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FontDialog fontDialog = new FontDialog();
-
-            if(fontDialog.ShowDialog() == DialogResult.OK)
-            {
-                canvasFont = fontDialog.Font;
-            }
         }
     }
 }
