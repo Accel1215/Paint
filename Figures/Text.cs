@@ -16,8 +16,8 @@ namespace Paint.Figures
         private string text = System.String.Empty;
 
 
-        public Text(Point pointOne, Point pointTwo, int lineSize, Color lineColor, Font font, Form parent) : 
-            base(pointOne, pointTwo, lineSize, lineColor)
+        public Text(Point pointOne, Point pointTwo, Point offset, int lineSize, Color lineColor, Font font, Form parent) : 
+            base(pointOne, pointTwo, offset, lineSize, lineColor)
         {
             this.font = font;
             this.parent = parent;

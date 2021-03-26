@@ -15,12 +15,13 @@ namespace Paint.Figures
         public List<Point> Points => points;
 
 
-        public Curve(Point pointOne, Point pointTwo, int lineSize, Color lineColor) :
-            base(pointOne, pointTwo, lineSize, lineColor)
+        public Curve(Point pointOne, Point pointTwo, Point offset, int lineSize, Color lineColor) :
+            base(pointOne, pointTwo, offset, lineSize, lineColor)
         {
             points = new List<Point>();
-            points.Add(pointOne);
-            points.Add(pointTwo);
+
+            points.Add(new Point(pointOne.X - offset.X, pointOne.Y - offset.Y));
+            points.Add(new Point(pointTwo.X - offset.X, pointTwo.Y - offset.Y));
         }
 
         public Curve(int x1, int y1, int x2, int y2, int lineSize, Color lineColor) :
@@ -35,12 +36,15 @@ namespace Paint.Figures
         {
             Pen pen = new Pen(lineColor, lineSize);
 
-            for(int i = 0; i < points.Count(); ++i)
+            Point[] p = points.ToArray();
+
+            for (int i = 0; i < p.Count(); ++i)
             {
-                points[i].Offset(offset);
+                p[i].X += offset.X;
+                p[i].Y += offset.Y;
             }
 
-            g.DrawCurve(pen, points.ToArray());
+            g.DrawCurve(pen, p);
 
             pen.Dispose();
         }
@@ -49,12 +53,15 @@ namespace Paint.Figures
         {
             Pen pen = new Pen(Color.White, lineSize);
 
-            for (int i = 0; i < points.Count(); ++i)
+            Point[] p = points.ToArray();
+
+            for (int i = 0; i < p.Count(); ++i)
             {
-                points[i].Offset(offset);
+                p[i].X += offset.X;
+                p[i].Y += offset.Y;
             }
 
-            g.DrawCurve(pen, points.ToArray());
+            g.DrawCurve(pen, p);
 
             pen.Dispose();
         }
@@ -78,8 +85,8 @@ namespace Paint.Figures
 
         public override void MouseMove(Graphics g, Point mousePosition, Point offset)
         {
-            pointTwo.X = mousePosition.X;
-            pointTwo.Y = mousePosition.Y;
+            pointTwo.X = mousePosition.X - offset.X;
+            pointTwo.Y = mousePosition.Y - offset.Y;
 
             points.Add(pointTwo);
         }

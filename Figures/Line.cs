@@ -10,8 +10,8 @@ namespace Paint.Figures
     [Serializable()]
     class Line : Figure
     {
-        public Line(Point pointOne, Point pointTwo, int lineSize, Color lineColor) :
-            base(pointOne, pointTwo, lineSize, lineColor)
+        public Line(Point pointOne, Point pointTwo, Point offset, int lineSize, Color lineColor) :
+            base(pointOne, pointTwo, offset, lineSize, lineColor)
         { }
 
         public Line(int x1, int y1, int x2, int y2, int lineSize, Color lineColor) :

@@ -35,10 +35,12 @@ namespace Paint
 
         public StatusCheck falidateStatus = StatusCheck.NotChecked;
 
-        public Figure(Point pointOne, Point pointTwo, int lineSize, Color lineColor)
+        public Figure(Point pointOne, Point pointTwo, Point offset, int lineSize, Color lineColor)
         {
-            this.pointOne = pointOne;
-            this.pointTwo = pointTwo;
+            this.pointOne.X = pointOne.X - offset.X;
+            this.pointOne.Y = pointOne.Y - offset.Y;
+            this.pointTwo.X = pointTwo.X - offset.X;
+            this.pointTwo.Y = pointTwo.Y - offset.Y;
 
             this.lineSize = lineSize;
             this.lineColor = lineColor;
@@ -66,8 +68,8 @@ namespace Paint
 
         public virtual void MouseMove(Graphics g, Point mousePosition, Point offset)
         {
-            pointTwo.X = mousePosition.X;
-            pointTwo.Y = mousePosition.Y;
+            pointTwo.X = mousePosition.X - offset.X;
+            pointTwo.Y = mousePosition.Y - offset.Y;
         }
 
         public void Normalization(ref Point pointOne, ref Point pointTwo)

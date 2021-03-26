@@ -59,36 +59,31 @@ namespace Paint
             {
                 case FigureType.Line:
                     {
-                        e.Location.Offset(AutoScrollPosition);
-                        array.Add(new Figures.Line(e.Location, e.Location, main.LineWidth, main.LineColor));
+                        array.Add(new Figures.Line(e.Location, e.Location, AutoScrollPosition, main.LineWidth, main.LineColor));
                         break;
                     }
 
                 case FigureType.Curve:
                     {
-                        e.Location.Offset(AutoScrollPosition);
-                        array.Add(new Figures.Curve(e.Location, e.Location, main.LineWidth, main.LineColor));
+                        array.Add(new Figures.Curve(e.Location, e.Location, AutoScrollPosition, main.LineWidth, main.LineColor));
                         break;
                     }
                     
                 case FigureType.Rectangle:
                     {
-                        e.Location.Offset(AutoScrollPosition);
-                        array.Add(new Figures.Rectangle(e.Location, e.Location, main.LineWidth, main.LineColor, main.SolidColor));
+                        array.Add(new Figures.Rectangle(e.Location, e.Location, AutoScrollPosition, main.LineWidth, main.LineColor, main.SolidColor));
                         break;
                     }
 
                 case FigureType.Ellipse:
                     {
-                        e.Location.Offset(AutoScrollPosition);
-                        array.Add(new Figures.Ellipse(e.Location, e.Location, main.LineWidth, main.LineColor, main.SolidColor));
+                        array.Add(new Figures.Ellipse(e.Location, e.Location, AutoScrollPosition, main.LineWidth, main.LineColor, main.SolidColor));
                         break;
                     }
 
                 case FigureType.Text:
                     {
-                        e.Location.Offset(AutoScrollPosition);
-                        array.Add(new Figures.Text(e.Location, e.Location, main.LineWidth, main.LineColor, main.CanvasFont, this));
+                        array.Add(new Figures.Text(e.Location, e.Location, AutoScrollPosition, main.LineWidth, main.LineColor, main.CanvasFont, this));
                         break;
                     }
             }
@@ -98,8 +93,7 @@ namespace Paint
         {
             if (mousePresed)
             {
-                Point mousePoint = new Point(e.X - AutoScrollPosition.X, e.Y - AutoScrollPosition.Y);
-                array.Last().MouseMove(buffer.Graphics, mousePoint, AutoScrollPosition);
+                array.Last().MouseMove(buffer.Graphics, e.Location, AutoScrollPosition);
                 Invalidate();
             }
 
@@ -206,9 +200,7 @@ namespace Paint
                 Curve curve = (Curve)f;
                 foreach(Point i in curve.Points)
                 {
-                    pointWithOffset = new Point(i.X - AutoScrollPosition.X, i.Y - AutoScrollPosition.Y);
-
-                    if (!IsPointInWorkplace(pointWithOffset))
+                    if (!IsPointInWorkplace(i))
                     {
                         return false;
                     }

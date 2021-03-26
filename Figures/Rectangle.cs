@@ -13,8 +13,8 @@ namespace Paint.Figures
         private Color solidColor;
 
 
-        public Rectangle(Point pointOne, Point pointTwo, int lineSize, Color lineColor, Color fillColor) : 
-            base(pointOne, pointTwo, lineSize, lineColor) 
+        public Rectangle(Point pointOne, Point pointTwo, Point offset, int lineSize, Color lineColor, Color fillColor) : 
+            base(pointOne, pointTwo, offset, lineSize, lineColor) 
         {
             solidColor = fillColor;
         }
