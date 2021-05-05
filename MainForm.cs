@@ -16,7 +16,8 @@ namespace Paint
         private int lineWidth = 1;
         private FigureType figure = FigureType.Line;
         private Font canvasFont = new Font("Times New Roman", 12);
-        
+        private bool needSolidColor = true;
+
         public Color SolidColor { get => solidColor; }
 
         public Color LineColor { get => lineColor; }
@@ -27,6 +28,7 @@ namespace Paint
 
         public Font CanvasFont { get => canvasFont; }
 
+        public bool NeedSolidColor { get => needSolidColor; }
 
         public MainForm()
         {
@@ -190,6 +192,20 @@ namespace Paint
             }
         }
 
+        private void backgroundSwitchToolStripBottonClick(object sender, EventArgs e)
+        {
+            if (backgroundSwitchToolStripBotton.Checked)
+            {
+                needSolidColor = false;
+                backgroundSwitchToolStripBotton.Checked = false;
+            }
+            else
+            {
+                needSolidColor = true;
+                backgroundSwitchToolStripBotton.Checked = true;
+            }
+        }
+
         public void SaveFile(bool specifyPath = false)
         {
             CanvasForm canvas = (CanvasForm)ActiveMdiChild;
@@ -328,9 +344,9 @@ namespace Paint
             }
         }
 
-        public void DrawStatusBarCoordinate(Point location)
+        public void DrawStatusBarCoordinate(Point location, Point offset)
         {
-            coordinateStatusBarPanel.Text = Convert.ToString(location.X) + 'x' + Convert.ToString(location.Y);
+            coordinateStatusBarPanel.Text = Convert.ToString(location.X - offset.X) + 'x' + Convert.ToString(location.Y - offset.Y);
         }
 
         public void DrawStatusBarFont()
@@ -344,5 +360,6 @@ namespace Paint
             fontSizeStatusBarPanel.Text = System.String.Empty;
             fontStatusBarPanel.Text = System.String.Empty;
         }
+      
     }
 }

@@ -112,7 +112,7 @@ namespace Paint
 
         private void HeightSizeTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (System.String.IsNullOrEmpty(heightTextBox.Text))
+            if (System.String.IsNullOrEmpty(heightTextBox.Text) || System.String.IsNullOrEmpty(widthTextBox.Text))
             {
                 OkButton.Enabled = false;
             }
@@ -124,7 +124,7 @@ namespace Paint
 
         private void WidthSizeTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (System.String.IsNullOrEmpty(widthTextBox.Text))
+            if (System.String.IsNullOrEmpty(widthTextBox.Text) || System.String.IsNullOrEmpty(heightTextBox.Text))
             {
                 OkButton.Enabled = false;
             }

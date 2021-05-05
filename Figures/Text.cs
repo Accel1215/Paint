@@ -12,6 +12,7 @@ namespace Paint.Figures
     class Text : Figure
     {
         private Font font;
+        [NonSerialized()]
         private Form parent;
         private string text = System.String.Empty;
 
@@ -69,20 +70,31 @@ namespace Paint.Figures
 
         public override void FinishDraw(Graphics g, Point offset)
         {
-            TextBox textBox = new TextBox();
-            textBox.Parent = parent;
-
             Point normalPointOne = new Point(pointOne.X + offset.X, pointOne.Y + offset.Y);
             Point normalPointTwo = new Point(pointTwo.X + offset.X, pointTwo.Y + offset.Y);
 
             Normalization(ref normalPointOne, ref normalPointTwo);
 
-            textBox.Location = normalPointOne;
-            textBox.Size = new Size(normalPointTwo.X - normalPointOne.X, normalPointTwo.Y - normalPointOne.Y);
-            textBox.Multiline = true;
-            textBox.Font = font;
-            textBox.ForeColor = lineColor;
+            TextBox textBox = new TextBox
+            {
+                Location = normalPointOne,
+                Size = new Size(normalPointTwo.X - normalPointOne.X, normalPointTwo.Y - normalPointOne.Y),
+                Multiline = true,
+                Font = font,
+                ForeColor = lineColor,
+                Parent = parent
+            };
+
+            textBox.Focus();
             textBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Click);
+            textBox.LostFocus += new System.EventHandler(this.LostFocus);
+
+            if (normalPointOne == normalPointTwo)
+            {
+                falidateStatus = StatusCheck.Bad;
+                return;
+            }
+
 
             MainForm main = (MainForm)parent.ParentForm;
             main.DrawStatusBarFont();
@@ -93,11 +105,15 @@ namespace Paint.Figures
             if (pointOne == pointTwo)
             {
                 falidateStatus = StatusCheck.Bad;
+                MainForm main = (MainForm)parent.ParentForm;
+                main.EraseStatusBarFont();
                 return;
             }
             if(text == System.String.Empty)
             {
                 falidateStatus = StatusCheck.Bad;
+                MainForm main = (MainForm)parent.ParentForm;
+                main.EraseStatusBarFont();
                 return;
             }
             falidateStatus = StatusCheck.Good;
@@ -116,6 +132,19 @@ namespace Paint.Figures
                 MainForm main = (MainForm)parent.ParentForm;
                 main.EraseStatusBarFont();
             }
+        }
+
+        public void LostFocus(object sender, EventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+
+            parent.Invalidate();
+            text = textBox.Text;
+            Falidate();
+            textBox.Dispose();
+
+            MainForm main = (MainForm)parent.ParentForm;
+            main.EraseStatusBarFont();
         }
     }
 }

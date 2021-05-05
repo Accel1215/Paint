@@ -73,6 +73,7 @@
             this.rectangleToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ellipseToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.textToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.backgroundSwitchToolStripBotton = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coordinateStatusBarPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.canvasSizeStatusBarPanel)).BeginInit();
@@ -311,6 +312,7 @@
             this.penColorToolStripButton,
             this.backgroundColorToolStripButton,
             this.fontToolStripButton,
+            this.backgroundSwitchToolStripBotton,
             this.toolStripSeparator2,
             this.canvasSizeToolStripButton,
             this.toolStripSeparator3,
@@ -476,6 +478,17 @@
             this.textToolStripButton.Text = "Text";
             this.textToolStripButton.Click += new System.EventHandler(this.FigureChooseClick);
             // 
+            // backgroundSwitchToolStripBotton
+            // 
+            this.backgroundSwitchToolStripBotton.Checked = true;
+            this.backgroundSwitchToolStripBotton.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.backgroundSwitchToolStripBotton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.backgroundSwitchToolStripBotton.Image = ((System.Drawing.Image)(resources.GetObject("backgroundSwitchToolStripBotton.Image")));
+            this.backgroundSwitchToolStripBotton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.backgroundSwitchToolStripBotton.Name = "backgroundSwitchToolStripBotton";
+            this.backgroundSwitchToolStripBotton.Size = new System.Drawing.Size(23, 22);
+            this.backgroundSwitchToolStripBotton.Click += new System.EventHandler(this.backgroundSwitchToolStripBottonClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -551,6 +564,7 @@
         private System.Windows.Forms.StatusBarPanel fontStatusBarPanel;
         private System.Windows.Forms.StatusBarPanel fontSizeStatusBarPanel;
         private System.Windows.Forms.ToolStripButton fontToolStripButton;
+        private System.Windows.Forms.ToolStripButton backgroundSwitchToolStripBotton;
     }
 }
 

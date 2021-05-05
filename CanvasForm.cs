@@ -40,7 +40,7 @@ namespace Paint
             InitializeComponent();
             array = new List<Figure>();
             workPlaceSize = size;
-            Size = size;
+            Size = new Size(size.Width + PreferredSize.Width, size.Height + PreferredSize.Height);
             AutoScrollMinSize = size;
         }
 
@@ -54,6 +54,16 @@ namespace Paint
             mousePresed = true;
 
             MainForm main = (MainForm)ParentForm;
+
+            Color solidColor;
+            if(main.NeedSolidColor)
+            {
+                solidColor = main.SolidColor;
+            }
+            else
+            {
+                solidColor = Color.White;
+            }
 
             switch (main.Figure)
             {
@@ -71,13 +81,13 @@ namespace Paint
                     
                 case FigureType.Rectangle:
                     {
-                        array.Add(new Figures.Rectangle(e.Location, e.Location, AutoScrollPosition, main.LineWidth, main.LineColor, main.SolidColor));
+                        array.Add(new Figures.Rectangle(e.Location, e.Location, AutoScrollPosition, main.LineWidth, main.LineColor, solidColor));
                         break;
                     }
 
                 case FigureType.Ellipse:
                     {
-                        array.Add(new Figures.Ellipse(e.Location, e.Location, AutoScrollPosition, main.LineWidth, main.LineColor, main.SolidColor));
+                        array.Add(new Figures.Ellipse(e.Location, e.Location, AutoScrollPosition, main.LineWidth, main.LineColor, solidColor));
                         break;
                     }
 
@@ -98,7 +108,7 @@ namespace Paint
             }
 
             MainForm main = (MainForm)ParentForm;
-            main.DrawStatusBarCoordinate(e.Location);
+            main.DrawStatusBarCoordinate(e.Location, AutoScrollPosition);
         }
 
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
